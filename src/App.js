@@ -1,9 +1,36 @@
 import React, { Component } from 'react';
-import './App.css';
+import { HashRouter as Router, Route, Link } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 class App extends Component {
   render() {
-    
+    return(<Header></Header>);
+  }
+}
+
+class Header extends Component {
+  render() {
+    return (
+        <div className="container">
+        <a className="home-link" href="#">
+          <h1 className="display-4">Smart Card</h1>
+        </a>
+        <nav>
+          <ul className="nav justify-content-end">
+            <li className="nav-item">
+              <a className="nav-link new-cards-link-nav" href="#">New Cards</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link active my-cards-link" href="#">My Cards</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link about-link" href="#">About</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    );
   }
 }
 
