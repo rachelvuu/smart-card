@@ -5,7 +5,19 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
   render() {
-    return(<Header></Header>);
+    return(
+      <BrowserRouter>
+        {/* if currentUrl == '/home', render <HomePage> */}
+        <Route path='/#/home' component={HomePage} />
+
+        {/* if currentUrl == '/about', render <AboutPage> */}
+        <Route path='/#/about' component={AboutPage} />
+
+        {/* if currentUrl == '/tools', render <AboutPage> */}
+        <Route path='/#/tools' component={ToolsPage} />
+
+      </BrowserRouter>
+    );    
   }
 }
 
@@ -34,4 +46,29 @@ class Header extends Component {
   }
 }
 
+class HomePage extends Component {
+  render () {
+    return (
+      <Header/>
+    )
+  }
+}
+
+class AboutPage extends Component {
+  render () {
+    return (
+      <Header/>
+    )
+  }
+}
+
+class ToolsPage extends Component {
+  render () {
+    return(
+      <Header/>
+    )
+  }
+}
+
+ 
 export default App;
