@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Header } from './App';
 
-class HomePage extends Component {
+class AboutPage extends Component {
   render () {
     return (
       <Header/>
@@ -9,4 +9,4 @@ class HomePage extends Component {
   }
 }
 
-export default HomePage;
+export default AboutPage;

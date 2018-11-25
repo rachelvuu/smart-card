@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Header } from './App';
 
-class HomePage extends Component {
+class NewCardsPage extends Component {
   render () {
-    return (
+    return(
       <Header/>
     )
   }
 }
 
-export default HomePage;
+export default NewCardsPage;
