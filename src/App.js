@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { HashRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as BrowserRouter, Route, Link, Switch} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -7,14 +7,16 @@ class App extends Component {
   render() {
     return(
       <BrowserRouter>
+        <Switch>
         {/* if currentUrl == '/home', render <HomePage> */}
-        <Route path='/#/home' component={HomePage} />
+        <Route path='/home' component={HomePage} />
 
         {/* if currentUrl == '/about', render <AboutPage> */}
-        <Route path='/#/about' component={AboutPage} />
+        <Route path='/about' component={AboutPage} />
 
         {/* if currentUrl == '/tools', render <AboutPage> */}
-        <Route path='/#/tools' component={ToolsPage} />
+        <Route path='/tools' component={ToolsPage} />
+        </Switch>
 
       </BrowserRouter>
     );    
