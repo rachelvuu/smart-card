@@ -72,3 +72,19 @@ code {
 .hidden {
   display: none;
 }
+
+.ameliaIcon {
+  background-image: url("./img/amelia-shull.jpg");
+  background-size: 100%;
+}
+
+.chrisIcon {
+  background-image: url("./img/chris-vitalis.jpg");
+  background-size: 100%;
+}
+
+.icon {
+  height: 100px;
+  width: 100px;
+  border-radius: 100%;
+}
