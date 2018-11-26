@@ -18,7 +18,16 @@ export class App extends Component {
   constructor() {
     super();
     this.state = {
-      cards: []
+      cards: [
+        {
+          front: "Card1 front",
+          back: "card1 back"
+        },
+        {
+          front: "card2 front",
+          back: "card2 back"
+        }
+      ]
     };
     this.addCard = this.addCard.bind(this);
     this.clearCards = this.clearCards.bind(this);
@@ -56,7 +65,7 @@ export class App extends Component {
           
           {/* if currentUrl == '/tools', render <NewCardsPage> */}
           <Route path='/my-cards' render={(routerProps) => (
-            <MyCardsPage {...routerProps} cards={this.state.cards}/>
+            <MyCardsPage {...routerProps} cards={this.state.cards} clearCards={this.clearCards}/>
           )}/>
         </Switch>
 
