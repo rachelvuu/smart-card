@@ -78,13 +78,34 @@ class ClassicModeForm extends Component {
   constructor() {
     super();
     this.addCard = this.addCard.bind(this);
+    this.updateFront = this.updateFront.bind(this);
+    this.updateBack = this.updateBack.bind(this);
+
+    this.state = {
+      front: '',
+      back: ''
+    };
+  }
+
+  updateFront(event) {
+    let state = this.state;
+    state.front = event.target.value;
+    this.setState(state);
+  }
+
+  updateBack(event) {
+    let state = this.state;
+    state.back = event.target.value;
+    this.setState(state);
   }
 
   render() {
+    let inputFront = (<textarea className="form-control input-card-text" maxLength="5000" rows="4" placeholder="Front of card" onChange={this.updateFront} value={this.state.front}></textarea>);
+    let inputBack = (<textarea className="form-control input-card-back" maxLength="5000" rows="4" placeholder="Back of card" onChange={this.updateBack} value={this.state.back}></textarea>);
     return(
       <div>
-        <textarea className="form-control input-card-text" maxLength="5000" rows="4" placeholder="Front of card"></textarea>
-        <textarea className="form-control input-card-back" maxLength="5000" rows="4" placeholder="Back of card"></textarea>
+        {inputFront}
+        {inputBack}
         <button className="btn btn-primary btn-sm submit-button" onClick={this.addCard}>Submit</button>
         <button className="btn btn-secondary btn-sm my-cards-link view-button disabled" aria-disabled="true">View Cards</button>
       </div>
@@ -93,10 +114,14 @@ class ClassicModeForm extends Component {
 
   addCard() {
     let newCard = {
-      front: "card3",
-      back: "card3"
+      front: this.state.front,
+      back: this.state.back
     }
     this.props.addCard(newCard);
+    this.setState({
+      front: '',
+      back: ''
+    });
   }
 }
 

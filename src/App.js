@@ -5,21 +5,19 @@ import AboutPage from './About';
 import NewCardsPage from './NewCards';
 import MyCardsPage from './MyCards';
 
-
+/* An array of card objects
+cards: [
+  {
+    front: "front of card",
+    back: "back of card"
+  }
+]
+*/
 export class App extends Component {
   constructor() {
     super();
     this.state = {
-      cards: [
-      {
-        front: "Test front",
-        back: "Test back"
-      },
-      {
-        front: "card",
-        back: "card2"
-      }
-    ]
+      cards: []
     };
     this.addCard = this.addCard.bind(this);
     this.clearCards = this.clearCards.bind(this);
