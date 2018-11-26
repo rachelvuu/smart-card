@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Header } from './App';
+import 'whatwg-fetch';
 
 class NewCardsPage extends Component {
   render () {
@@ -55,7 +56,7 @@ class AddCardForm extends Component {
 class Form extends Component {
   render() {
     if (this.props.smartMode) {
-      return (<SmartModeForm />)
+      return (<SmartModeForm addCard={this.props.addCard}/>)
     } else {
       return (<ClassicModeForm addCard={this.props.addCard}/>)
     }
@@ -63,14 +64,100 @@ class Form extends Component {
 }
 
 class SmartModeForm extends Component {
+  constructor() {
+    super();
+    this.state = {
+      text: ""
+    }
+    this.updateText = this.updateText.bind(this);
+    this.getData = this.getData.bind(this);
+  }
+  
+  updateText(event) {
+    let state = this.state;
+    state.text = event.target.value;
+    this.setState(state);
+  }
+
   render() {
     return (
       <div>
-        <textarea className="form-control input-card-text" maxLength="5000" rows="4" placeholder="Your notes go here"></textarea>
-        <button className="btn btn-primary btn-sm submit-button">Submit</button>
+        <textarea className="form-control input-card-text" maxLength="5000" rows="4" onChange={this.updateText} placeholder="Your notes go here"></textarea>
+        <button className="btn btn-primary btn-sm submit-button" onClick={this.getData}>Submit</button>
         <button className="btn btn-secondary btn-sm my-cards-link view-button disabled" aria-disabled="true">View Cards</button>
       </div>
     )
+  }
+
+  getData() {
+    let text = this.state.text;
+    this.test();
+    // call api
+    // get data
+    // update state of App
+
+    // remove the text from the input by resetting state of this
+  }
+
+  test() {
+    let text = this.state.text.replace(/"/g, '\'');
+    let content = {
+      headers: {
+        "Content-Type": "application/json",
+        "Ocp-Apim-Subscription-Key": "2796f530ee7443179bf560163b62a158"
+      },
+      type: "POST",
+      data: 
+        `{
+          "documents": [
+            {
+              "language": "en",
+              "id": "1",
+              "text":
+            }
+          ]
+        }`
+    };
+
+    window.fetch("https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/keyPhrases", content)
+      .then((result) => {
+        alert("yay");
+      })
+      .catch((error) => {
+        alert("we suck");
+      });
+    /*
+    ajax({
+        url: "https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/keyPhrases?" + params,
+        beforeSend: function(xhrObj){
+          // Request headers
+          xhrObj.setRequestHeader("Content-Type","application/json");
+          xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","2796f530ee7443179bf560163b62a158");
+        },
+        type: "POST",
+        // Request body
+        data: 
+          `{
+            "documents": [
+            {
+              "language": "en",
+              "id": "1",
+              "text": ${text}
+            }
+            ]
+          }`,
+    })
+    .done(function(data) {
+        alert("success");
+        data.documents[0].keyPhrases.forEach((phrase) => {
+          console.log(phrase);
+          this.addCard({front:phrase, back:""});
+        });
+    })
+    .fail(function() {
+        alert("error");
+    });*/
+
   }
 }
 
@@ -124,5 +211,8 @@ class ClassicModeForm extends Component {
     });
   }
 }
+
+
+
 
 export default NewCardsPage;

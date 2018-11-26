@@ -5,6 +5,7 @@ import AboutPage from './About';
 import NewCardsPage from './NewCards';
 import MyCardsPage from './MyCards';
 
+
 /* An array of card objects
 cards: [
   {
