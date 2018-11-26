@@ -82,7 +82,7 @@ class SmartModeForm extends Component {
   render() {
     return (
       <div>
-        <textarea className="form-control input-card-text" maxLength="5000" rows="4" onChange={this.updateText} placeholder="Your notes go here"></textarea>
+        <textarea className="form-control input-card-text" maxLength="5000" rows="4" onChange={this.updateText} value={this.state.text} placeholder="Your notes go here"></textarea>
         <button className="btn btn-primary btn-sm submit-button" onClick={this.getData}>Submit</button>
         <button className="btn btn-secondary btn-sm my-cards-link view-button disabled" aria-disabled="true">View Cards</button>
       </div>
@@ -90,74 +90,41 @@ class SmartModeForm extends Component {
   }
 
   getData() {
-    let text = this.state.text;
-    this.test();
-    // call api
-    // get data
-    // update state of App
-
-    // remove the text from the input by resetting state of this
-  }
-
-  test() {
     let text = this.state.text.replace(/"/g, '\'');
     let content = {
       headers: {
         "Content-Type": "application/json",
         "Ocp-Apim-Subscription-Key": "2796f530ee7443179bf560163b62a158"
       },
-      type: "POST",
-      data: 
-        `{
-          "documents": [
+      method: "post",
+      body: 
+        JSON.stringify({
+          documents: [
             {
-              "language": "en",
-              "id": "1",
-              "text":
+              language: "en",
+              id: "1",
+              text: text
             }
           ]
-        }`
+        })
     };
 
     window.fetch("https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/keyPhrases", content)
-      .then((result) => {
-        alert("yay");
+      .then((response) => {
+        return response.text();
+      })
+      .then((response) => {
+        return JSON.parse(response);
+      })
+      .then((response) => {
+        response.documents[0].keyPhrases.forEach((phrase) => {
+          this.props.addCard({front: phrase, back: "Back of card."});
+        });
+        this.setState({text: ""});
       })
       .catch((error) => {
-        alert("we suck");
+        console.log(error);
       });
-    /*
-    ajax({
-        url: "https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/keyPhrases?" + params,
-        beforeSend: function(xhrObj){
-          // Request headers
-          xhrObj.setRequestHeader("Content-Type","application/json");
-          xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","2796f530ee7443179bf560163b62a158");
-        },
-        type: "POST",
-        // Request body
-        data: 
-          `{
-            "documents": [
-            {
-              "language": "en",
-              "id": "1",
-              "text": ${text}
-            }
-            ]
-          }`,
-    })
-    .done(function(data) {
-        alert("success");
-        data.documents[0].keyPhrases.forEach((phrase) => {
-          console.log(phrase);
-          this.addCard({front:phrase, back:""});
-        });
-    })
-    .fail(function() {
-        alert("error");
-    });*/
-
   }
 }
 
