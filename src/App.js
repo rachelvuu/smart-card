@@ -1,20 +1,48 @@
 import React, { Component } from 'react';
-import { BrowserRouter as BrowserRouter, Route, Link, Switch} from 'react-router-dom'
+import { BrowserRouter, Route, Link, Switch} from 'react-router-dom'
 import HomePage from './Home';
 import AboutPage from './About';
 import NewCardsPage from './NewCards';
 import MyCardsPage from './MyCards';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 export class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      cards: [
+      {
+        front: "Test front",
+        back: "Test back"
+      },
+      {
+        front: "card",
+        back: "card2"
+      }
+    ]
+    };
+    this.addCard = this.addCard.bind(this);
+    this.clearCards = this.clearCards.bind(this);
+  }
+
+  addCard(newCard) {
+    let cards = this.state.cards;
+    cards.push(newCard);
+    this.setState({
+      cards: cards
+    });
+  }
+
+  clearCards() {
+    this.setState({
+      cards: []
+    })
+  }
+
   render() {
     return(
       <BrowserRouter>
         <Switch>
-          {/* if currentUrl == '/', render <HomePage> */}
-          <Route path='/' component={HomePage} />
-
           {/* if currentUrl == '/home', render <HomePage> */}
           <Route path='/home' component={HomePage} />
 
@@ -22,14 +50,19 @@ export class App extends Component {
           <Route path='/about' component={AboutPage} />
 
           {/* if currentUrl == '/tools', render <NewCardsPage> */}
-          <Route path='/new-cards' component={NewCardsPage} />
+          <Route path='/new-cards' render={(routerProps) => (
+            <NewCardsPage {...routerProps} addCard={this.addCard}/>
+          )}/>
 
+          
           {/* if currentUrl == '/tools', render <NewCardsPage> */}
-          <Route path='/my-cards' component={MyCardsPage} />
+          <Route path='/my-cards' render={(routerProps) => (
+            <MyCardsPage {...routerProps} cards={this.state.cards}/>
+          )}/>
         </Switch>
 
       </BrowserRouter>
-    );    
+    );
   }
 }
 
