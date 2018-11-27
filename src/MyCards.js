@@ -5,7 +5,7 @@ import { Modal, Button } from 'react-bootstrap';
 
 
 class MyCardsPage extends Component {
-    constructor() {
+    constructor(props) {
         super();
         this.state = {
             editMode: false,
@@ -19,10 +19,12 @@ class MyCardsPage extends Component {
 
     updateCard(card) {
         this.props.updateCard(card);
-        this.setState({
-            editMode: true,
-            cardToEdit: null
-        });
+        setTimeout(() => {
+            this.setState({
+                editMode: true,
+                cardToEdit: null
+            })}
+        , 3000);
     }
 
     enableEdit() {
