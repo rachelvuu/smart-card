@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Header } from './App';
-
+import { BrowserRouter, Route, Link, Switch} from 'react-router-dom'
 
 class HomePage extends Component {
   render () {
     return (
-      <div>
+      <div className="background-image">
       <Header/>    
       <main>
         <section className="why">
@@ -16,7 +16,9 @@ class HomePage extends Component {
                way to study.
             </p>
             <hr className="my-4"></hr>
-            <a class="btn btn-lg get-started-button">Get Started</a>
+            <Link className="get-started-link" to="/new-cards">
+            <button class="btn btn-lg get-started-button">Get Started</button>
+            </Link> 
           </div>
           
         </section>

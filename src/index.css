@@ -125,3 +125,22 @@ nav li :hover{
   color: white;
 }
 
+.why {
+  background-image: url(img/book-stack.jpg);
+  background-size: cover;
+  padding: 2rem;
+  background-repeat: no-repeat;
+  background-position: right;
+}
+.jumbotron {
+  margin: 1rem;
+  text-align: left;
+  background-color: rgba(255, 255, 255, 0);
+  margin-right: 60%
+  
+}
+
+.background-image{
+  background-image: url(img/note-book.jpg);
+}
+
