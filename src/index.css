@@ -69,9 +69,10 @@ code {
   transform: rotateY(180deg);
 }
 
-.hidden {
-  display: none;
-}
+/*---------------------------------------------------------*/
+
+
+/*---------------------------------------------------------*/
 
 .ameliaIcon {
   background-image: url("./img/amelia-shull.jpg");

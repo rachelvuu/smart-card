@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Header } from './App';
+import { Link } from 'react-router-dom'
 import 'whatwg-fetch';
 
 class NewCardsPage extends Component {
@@ -84,7 +85,7 @@ class SmartModeForm extends Component {
       <div>
         <textarea className="form-control input-card-text" maxLength="5000" rows="4" onChange={this.updateText} value={this.state.text} placeholder="Your notes go here"></textarea>
         <button className="btn btn-primary btn-sm submit-button" onClick={this.getData}>Submit</button>
-        <button className="btn btn-secondary btn-sm my-cards-link view-button disabled" aria-disabled="true">View Cards</button>
+        <Link to="/my-cards" className="btn btn-secondary btn-sm my-cards-link view-button">View Cards</Link>
       </div>
     )
   }
