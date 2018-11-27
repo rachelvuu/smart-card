@@ -9,7 +9,8 @@ class MyCardsPage extends Component {
         super();
         this.state = {
             editMode: false,
-            cardToEdit: null
+            cardToEdit: null,
+            cards: props.cards
         }
         this.editCard = this.editCard.bind(this);
         this.enableEdit = this.enableEdit.bind(this);
@@ -19,12 +20,12 @@ class MyCardsPage extends Component {
 
     updateCard(card) {
         this.props.updateCard(card);
-        setTimeout(() => {
-            this.setState({
-                editMode: true,
-                cardToEdit: null
-            })}
-        , 3000);
+
+        
+        this.setState({
+            editMode: true,
+            cardToEdit: null,
+        });
     }
 
     enableEdit() {
@@ -188,10 +189,10 @@ class Card extends Component {
             <div className="flip-card" onClick={() => this.props.editCard(this.state)}>
                 <div className="flip-card-inner">
                     <div className="flip-card-front">
-                        <p>{this.state.front}</p>
+                        <p>{this.props.card.front}</p>
                     </div>
                     <div className="flip-card-back">
-                        <p>{this.state.back}</p>
+                        <p>{this.props.card.back}</p>
                     </div>
                 </div>
             </div>
