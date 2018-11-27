@@ -90,6 +90,7 @@ code {
   border-radius: 100%;
 }
 
+
 .menu{
   background-color: #4b2e83 ; 
   margin: 0;
@@ -113,4 +114,14 @@ nav li :hover{
   font-weight: bold;
 }
 
+/* body{
+  background-image: url(img/note-book.jpg);
+  background-repeat: repeat repeat;
+  background-size: fill; 
+} */
+
+.get-started-button{
+  background-color: #4b2e83;
+  color: white;
+}
 
