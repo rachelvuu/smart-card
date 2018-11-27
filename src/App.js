@@ -49,6 +49,7 @@ export class App extends Component {
 
   render() {
     return(
+      
       <BrowserRouter>
         <Switch>
           {/* if currentUrl == '/home', render <HomePage> */}
@@ -70,6 +71,7 @@ export class App extends Component {
         </Switch>
 
       </BrowserRouter>
+      
     );
   }
 }
@@ -77,7 +79,7 @@ export class App extends Component {
 export class Header extends Component {
   render() {
     return (
-        <div className="container">
+        <header className="menu">
         <Link className="home-link" to="/home">
           <h1 className="display-4">Smart Card</h1>
         </Link>
@@ -94,7 +96,7 @@ export class Header extends Component {
             </li>
           </ul>
         </nav>
-      </div>
+      </header>
     );
   }
 }

@@ -89,3 +89,28 @@ code {
   width: 100px;
   border-radius: 100%;
 }
+
+.menu{
+  background-color: #4b2e83 ; 
+  margin: 0;
+  padding: .5rem;
+}
+
+.menu h1 {
+  color: #b7a57a;
+}
+
+.nav-link {
+  color: #b7a57a;
+}
+
+.menu :hover{
+text-decoration: none;
+}
+
+nav li :hover{
+  color: white;
+  font-weight: bold;
+}
+
+
