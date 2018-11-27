@@ -18,7 +18,6 @@ class AboutPage extends Component {
 class Profile extends Component {
   let
   render(){
-    console.log(this.props.url);
     return (
       <div>
         <div className={this.props.person + "Icon icon"}></div>

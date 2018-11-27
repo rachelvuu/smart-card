@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Header } from './App';
-import { BrowserRouter, Route, Link, Switch} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 class HomePage extends Component {
   render () {
@@ -11,13 +11,13 @@ class HomePage extends Component {
         <section className="why">
           <div className="jumbotron">
             <h2 className="display-4">Smart Card</h2>
-            <p class="lead">The 
+            <p className="lead">The 
               <em> new </em>
                way to study.
             </p>
             <hr className="my-4"></hr>
             <Link className="get-started-link" to="/new-cards">
-            <button class="btn btn-lg get-started-button">Get Started</button>
+            <button className="btn btn-lg get-started-button">Get Started</button>
             </Link> 
           </div>
           
