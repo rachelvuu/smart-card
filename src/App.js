@@ -31,11 +31,23 @@ export class App extends Component {
     };
     this.addCard = this.addCard.bind(this);
     this.clearCards = this.clearCards.bind(this);
+    this.updateCard = this.updateCard.bind(this);
   }
 
   addCard(newCard) {
     let cards = this.state.cards;
     cards.push(newCard);
+    this.setState({
+      cards: cards
+    });
+  }
+
+  updateCard(card) {
+    let cards = this.state.cards;
+    cards[card.key] = {
+      front: card.front,
+      back: card.back
+    }
     this.setState({
       cards: cards
     });
@@ -66,7 +78,7 @@ export class App extends Component {
           
           {/* if currentUrl == '/tools', render <NewCardsPage> */}
           <Route path='/my-cards' render={(routerProps) => (
-            <MyCardsPage {...routerProps} cards={this.state.cards} clearCards={this.clearCards}/>
+            <MyCardsPage {...routerProps} cards={this.state.cards} clearCards={this.clearCards} updateCard={this.updateCard}/>
           )}/>
         </Switch>
 
@@ -79,7 +91,7 @@ export class App extends Component {
 export class Header extends Component {
   render() {
     return (
-        <header className="menu">
+        <header className="menu d-flex justify-content-between align-items-center">
         <Link className="home-link" to="/home">
           <h1 className="display-4">Smart Card</h1>
         </Link>
