@@ -14,6 +14,15 @@ class MyCardsPage extends Component {
         this.editCard = this.editCard.bind(this);
         this.enableEdit = this.enableEdit.bind(this);
         this.disableEdit = this.disableEdit.bind(this);
+        this.updateCard = this.updateCard.bind(this);
+    }
+
+    updateCard(card) {
+        this.props.updateCard(card);
+        this.setState({
+            editMode: true,
+            cardToEdit: null
+        });
     }
 
     enableEdit() {
@@ -43,7 +52,7 @@ class MyCardsPage extends Component {
     render() {
         let editModal = <div/>;
         if (this.state.cardToEdit != null) {
-            editModal = <EditModal front={this.state.cardToEdit.front} back={this.state.cardToEdit.back}></EditModal>
+            editModal = <EditModal num={this.state.cardToEdit.key}front={this.state.cardToEdit.front} back={this.state.cardToEdit.back} updateCard={this.updateCard}></EditModal>
         }
         return(
             <div>
@@ -52,7 +61,7 @@ class MyCardsPage extends Component {
                 <Tools clearCards={this.props.clearCards} enableEdit={this.enableEdit} disableEdit={this.disableEdit}/>
                 <div className="card-container">
                     {this.props.cards.map((card, i) => {
-                        return <Card key={i} card={card} editCard={this.editCard}/>
+                        return <Card key={i} num={i} card={card} editCard={this.editCard}/>
                     })}
                 </div>
             </div>
@@ -61,6 +70,18 @@ class MyCardsPage extends Component {
 }
 
 class EditModal extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            front: props.front,
+            back: props.back,
+            key: props.num
+        }
+        this.updateBack = this.updateBack.bind(this);
+        this.updateFront = this.updateFront.bind(this);
+        this.updateCard = this.updateCard.bind(this);
+    }
+
     render() {
         return (
             <div className="static-modal">
@@ -70,17 +91,40 @@ class EditModal extends Component {
                 </Modal.Header>
 
                 <Modal.Body>
-                    <textarea className="form-control edit-card-text" maxLength="5000" rows="4" defaultValue={this.props.front}></textarea>
-                    <textarea className="form-control edit-card-back" maxLength="5000" rows="4" defaultValue={this.props.back}></textarea>
+                    <textarea className="form-control edit-card-text" maxLength="5000" rows="4" defaultValue={this.props.front} onChange={this.updateFront}></textarea>
+                    <textarea className="form-control edit-card-back" maxLength="5000" rows="4" defaultValue={this.props.back} onChange={this.updateBack}></textarea>
                 </Modal.Body>
 
                 <Modal.Footer>
                     <Button bsStyle="danger">Delete</Button>
-                    <Button bsStyle="primary">Save changes</Button>
+                    <Button bsStyle="primary" onClick={this.updateCard}>Save changes</Button>
                 </Modal.Footer>
             </Modal.Dialog>
             </div>
         );
+    }
+
+    updateFront(event) {
+        this.setState({
+            front: event.target.value,
+            back: this.state.back
+        });
+    }
+
+    updateBack(event) {
+        this.setState({
+            front: this.state.front,
+            back: event.target.value
+        })
+    }
+
+    updateCard() {
+        let card = {
+            front: this.state.front,
+            back: this.state.back,
+            key: this.state.key
+        }
+        this.props.updateCard(card);
     }
 }
 
@@ -132,7 +176,8 @@ class Card extends Component {
         super(props);
         this.state = {
             front: props.card.front,
-            back: props.card.back
+            back: props.card.back,
+            key: props.num
         }
     }
 
@@ -144,7 +189,7 @@ class Card extends Component {
                         <p>{this.state.front}</p>
                     </div>
                     <div className="flip-card-back">
-                        <p>{this.state.front}</p>
+                        <p>{this.state.back}</p>
                     </div>
                 </div>
             </div>
