@@ -31,17 +31,21 @@ class MyCardsPage extends Component {
     }
 
     editCard() {
-        if (this.state.editMode) {
-            return <EditModal/>;
-        }
-        return(<div>test</div>);
+        let editMode = this.state.editMode;
+        this.setState({
+            editMode: editMode,
+            editCard: editMode
+        });
     }
 
     render() {
-        let test = this.editCard;
+        let editCard = <div/>;
+        if (this.state.editCard) {
+            editCard = <EditModal></EditModal>
+        }
         return(
             <div>
-                {test}
+                {editCard}
                 <Header/>
                 <Tools clearCards={this.props.clearCards} enableEdit={this.enableEdit} disableEdit={this.disableEdit}/>
                 <div className="card-container">
@@ -60,13 +64,16 @@ class EditModal extends Component {
             <div className="static-modal">
             <Modal.Dialog>
                 <Modal.Header>
-                <Modal.Title>Modal title</Modal.Title>
+                <Modal.Title>Edit Card</Modal.Title>
                 </Modal.Header>
 
-                <Modal.Body>One fine body...</Modal.Body>
+                <Modal.Body>
+                    <textarea className="form-control input-card-text" maxLength="5000" rows="4" placeholder="Front of card"></textarea>
+                    <textarea className="form-control input-card-back" maxLength="5000" rows="4" placeholder="Back of card"></textarea>
+                </Modal.Body>
 
                 <Modal.Footer>
-                <Button>Close</Button>
+                <Button bsStyle="danger">Delete</Button>
                 <Button bsStyle="primary">Save changes</Button>
                 </Modal.Footer>
             </Modal.Dialog>
