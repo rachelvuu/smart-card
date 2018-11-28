@@ -77,6 +77,7 @@ code {
 .ameliaIcon {
   background-image: url("./img/amelia-shull.jpg");
   background-size: 100%;
+  
 }
 
 .chrisIcon {
@@ -84,7 +85,7 @@ code {
   background-size: 100%;
 }
 
-.icon {
+.bioPic {
   height: 100px;
   width: 100px;
   border-radius: 100%;
@@ -144,3 +145,17 @@ nav li :hover{
   background-image: url(img/note-book.jpg);
 }
 
+.more-info {
+  margin: 2rem;
+  text-align: center;
+  background-color: #b7a57a;
+  padding: 1rem;
+}
+
+.more-info h2, .samples h2 {
+  font-size: 2rem;
+}
+
+.icon, .icon-front {
+  width: 2rem;
+}

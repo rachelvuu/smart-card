@@ -20,7 +20,7 @@ class Profile extends Component {
   render(){
     return (
       <div>
-        <div className={this.props.person + "Icon icon"}></div>
+        <div className={this.props.person + "Icon bioPic"}></div>
         <p>{this.props.bio}</p>
       </div>
     )

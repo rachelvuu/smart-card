@@ -61,25 +61,26 @@ export class App extends Component {
 
   render() {
     return(
-      
+     
       <BrowserRouter>
+      
         <Switch>
           {/* if currentUrl == '/home', render <HomePage> */}
-          <Route path='/home' component={HomePage} />
-
+          <Route path="/home" component={HomePage}/>
           {/* if currentUrl == '/about', render <AboutPage> */}
           <Route path='/about' component={AboutPage} />
 
-          {/* if currentUrl == '/tools', render <NewCardsPage> */}
+          {/* if currentUrl == '/new-cards', render <NewCardsPage> */}
           <Route path='/new-cards' render={(routerProps) => (
             <NewCardsPage {...routerProps} addCard={this.addCard}/>
           )}/>
 
           
           {/* if currentUrl == '/tools', render <NewCardsPage> */}
-          <Route path='/my-cards' render={(routerProps) => (
+          <Route path='/tools' render={(routerProps) => (
             <MyCardsPage {...routerProps} cards={this.state.cards} clearCards={this.clearCards} updateCard={this.updateCard}/>
           )}/>
+          <Route path="*" component={HomePage}/>
         </Switch>
 
       </BrowserRouter>
