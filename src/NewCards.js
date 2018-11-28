@@ -82,10 +82,12 @@ class SmartModeForm extends Component {
 
   render() {
     return (
-      <div>
+      <div className="text-input">
         <textarea className="form-control input-card-text" maxLength="5000" rows="4" onChange={this.updateText} value={this.state.text} placeholder="Your notes go here"></textarea>
-        <button className="btn btn-primary btn-sm submit-button" onClick={this.getData}>Submit</button>
-        <Link to="/my-cards" className="btn btn-secondary btn-sm my-cards-link view-button">View Cards</Link>
+        <div>
+          <button className="btn btn-p btn-sm submit-button" onClick={this.getData}>Submit</button>
+          <Link to="/my-cards" className="btn btn-secondary btn-sm my-cards-link view-button">View Cards</Link>
+        </div>
       </div>
     )
   }
@@ -155,14 +157,16 @@ class ClassicModeForm extends Component {
   }
 
   render() {
-    let inputFront = (<textarea className="form-control input-card-text" maxLength="5000" rows="4" placeholder="Front of card" onChange={this.updateFront} value={this.state.front}></textarea>);
+    let inputFront = (<textarea className="form-control input-card-front" maxLength="5000" rows="4" placeholder="Front of card" onChange={this.updateFront} value={this.state.front}></textarea>);
     let inputBack = (<textarea className="form-control input-card-back" maxLength="5000" rows="4" placeholder="Back of card" onChange={this.updateBack} value={this.state.back}></textarea>);
     return(
-      <div>
+      <div className="text-input">
         {inputFront}
         {inputBack}
-        <button className="btn btn-primary btn-sm submit-button" onClick={this.addCard}>Submit</button>
-        <button className="btn btn-secondary btn-sm my-cards-link view-button disabled" aria-disabled="true">View Cards</button>
+        <div>
+          <button className="btn btn-p btn-sm submit-button" onClick={this.addCard}>Submit</button>
+          <Link to="/my-cards" className="btn btn-secondary btn-sm my-cards-link view-button">View Cards</Link>
+        </div>
       </div>
     )
   }

@@ -20,18 +20,19 @@ export class App extends Component {
     this.state = {
       cards: [
         {
-          front: "Card1 front",
-          back: "card1 back"
+          front: "Example Card",
+          back: "Back of example card"
         },
         {
-          front: "card2 front",
-          back: "card2 back"
+          front: "We worked really hard on this project",
+          back: "I hope you can tell"
         }
       ]
     };
     this.addCard = this.addCard.bind(this);
     this.clearCards = this.clearCards.bind(this);
     this.updateCard = this.updateCard.bind(this);
+    this.deleteCard = this.deleteCard.bind(this);
   }
 
   addCard(newCard) {
@@ -59,6 +60,14 @@ export class App extends Component {
     })
   }
 
+  deleteCard(index) {
+    let cards = this.state.cards;
+    cards.splice(index, 1);
+    this.setState({
+      cards: cards
+    });
+  }
+
   render() {
     return(
      
@@ -76,9 +85,9 @@ export class App extends Component {
           )}/>
 
           
-          {/* if currentUrl == '/tools', render <NewCardsPage> */}
-          <Route path='/tools' render={(routerProps) => (
-            <MyCardsPage {...routerProps} cards={this.state.cards} clearCards={this.clearCards} updateCard={this.updateCard}/>
+          {/* if currentUrl == '/my-caards', render <MyCardsPage> */}
+          <Route path='/my-cards' render={(routerProps) => (
+            <MyCardsPage {...routerProps} cards={this.state.cards} clearCards={this.clearCards} updateCard={this.updateCard} deleteCard={this.deleteCard}/>
           )}/>
           <Route path="*" component={HomePage}/>
         </Switch>
@@ -94,7 +103,8 @@ export class Header extends Component {
     return (
         <header className="menu d-flex justify-content-between align-items-center">
         <Link className="home-link" to="/home">
-          <h1 className="display-4">Smart Card</h1>
+          <h1 className="display-4 title">Smart Card</h1>
+          <img className="icon" alt="Graphic of a notepad icon" src="https://img.icons8.com/metro/52/b7a57a/note.png"></img>
         </Link>
         <nav>
           <ul className="nav justify-content-end">

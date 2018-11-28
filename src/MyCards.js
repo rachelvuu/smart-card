@@ -16,12 +16,12 @@ class MyCardsPage extends Component {
         this.enableEdit = this.enableEdit.bind(this);
         this.disableEdit = this.disableEdit.bind(this);
         this.updateCard = this.updateCard.bind(this);
+        this.deleteCard = this.deleteCard.bind(this);
     }
 
     updateCard(card) {
         this.props.updateCard(card);
 
-        
         this.setState({
             editMode: true,
             cardToEdit: null,
@@ -52,20 +52,31 @@ class MyCardsPage extends Component {
         }
     }
 
+    deleteCard(index) {
+        this.setState({
+            editMode: true,
+            cardToEdit: null
+        });
+        this.props.deleteCard(index);
+    }
+
     render() {
         let editModal = <div/>;
         if (this.state.cardToEdit != null) {
-            editModal = <EditModal num={this.state.cardToEdit.key}front={this.state.cardToEdit.front} back={this.state.cardToEdit.back} updateCard={this.updateCard}></EditModal>
+            editModal = <EditModal num={this.state.cardToEdit.key} front={this.state.cardToEdit.front} back={this.state.cardToEdit.back} updateCard={this.updateCard} deleteCard={this.deleteCard}></EditModal>
         }
         return(
             <div>
                 {editModal}
                 <Header/>
-                <Tools clearCards={this.props.clearCards} enableEdit={this.enableEdit} disableEdit={this.disableEdit}/>
-                <div className="card-container">
-                    {this.props.cards.map((card, i) => {
-                        return <Card key={i} num={i} card={card} editCard={this.editCard}/>
-                    })}
+                <div className="my-cards">
+                    <h2 className="display-4">My Cards</h2>
+                    <Tools clearCards={this.props.clearCards} enableEdit={this.enableEdit} disableEdit={this.disableEdit}/>
+                    <div className="card-container">
+                        {this.props.cards.map((card, i) => {
+                            return <Card key={i} num={i} card={card} editCard={this.editCard}/>
+                        })}
+                    </div>
                 </div>
             </div>
         )
@@ -83,6 +94,7 @@ class EditModal extends Component {
         this.updateBack = this.updateBack.bind(this);
         this.updateFront = this.updateFront.bind(this);
         this.updateCard = this.updateCard.bind(this);
+        this.deleteCard = this.deleteCard.bind(this);
     }
 
     render() {
@@ -94,12 +106,12 @@ class EditModal extends Component {
                 </Modal.Header>
 
                 <Modal.Body>
-                    <textarea className="form-control edit-card-text" maxLength="5000" rows="4" defaultValue={this.props.front} onChange={this.updateFront}></textarea>
-                    <textarea className="form-control edit-card-back" maxLength="5000" rows="4" defaultValue={this.props.back} onChange={this.updateBack}></textarea>
+                    <textarea className="form-control input-card-front" maxLength="5000" rows="4" defaultValue={this.props.front} onChange={this.updateFront}></textarea>
+                    <textarea className="form-control input-card-back" maxLength="5000" rows="4" defaultValue={this.props.back} onChange={this.updateBack}></textarea>
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button bsStyle="danger">Delete</Button>
+                    <Button bsStyle="danger" onClick={this.deleteCard}>Delete</Button>
                     <Button bsStyle="primary" onClick={this.updateCard}>Save changes</Button>
                 </Modal.Footer>
             </Modal.Dialog>
@@ -119,6 +131,10 @@ class EditModal extends Component {
             front: this.state.front,
             back: event.target.value
         })
+    }
+
+    deleteCard(){
+        this.props.deleteCard(this.state.key);
     }
 
     updateCard() {
@@ -158,16 +174,18 @@ class Tools extends Component {
     render() {
         if (!this.state.editTools) { // regular mode
             return(
-                <div>
-                    <button className="btn btn-primary btn-sm" onClick={this.props.clearCards}> Clear All</button>
-                    <Link to="/new-cards" className="btn btn-primary btn-sm">Add Card</Link>
-                    <button className="btn btn-primary btn-sm" onClick={this.enableEdit}>Edit</button>
+                <div className="tools">
+                    <Link to="/new-cards">
+                        <button className="btn btn-p btn-sm tool-btn">Add Cards</button>
+                    </Link>
+                    <button className="btn btn-p btn-sm tool-btn" onClick={this.props.clearCards}> Clear All</button>
+                    <button className="btn btn-p btn-sm tool-btn" onClick={this.enableEdit}>Edit</button>
                 </div>
             )
         } else { // edit mode
             return (
-                <div>
-                    <button className="btn btn-primary btn-sm" onClick={this.disableEdit}>Done Editing</button>
+                <div className="tools">
+                    <button className="btn btn-p btn-sm tool-btn" onClick={this.disableEdit}>Done Editing</button>
                 </div>
             )
         }

@@ -17,13 +17,13 @@ class HomePage extends Component {
              </p>
             <hr className="my-4"></hr>
             <Link className="get-started-link" to="/new-cards">
-            <button className="btn btn-lg get-started-button">Get Started</button>
+              <button className="btn btn-lg get-started-button">Get Started</button>
             </Link> 
           </div>
           </section>
           <section className="more-info">
               <h2 className="display-4">
-              <img class="icon-front" alt="Question mark icon" 
+              <img className="icon-front" alt="Question mark icon" 
               src="https://png.icons8.com/ios/100/000000/help-filled.png">
               </img>
               What is Smart Card
@@ -35,7 +35,7 @@ class HomePage extends Component {
              </p>
 
               <h2 className="display-4">
-              <img class="icon-front" alt="Person Icon" 
+              <img className="icon-front" alt="Person Icon" 
               src="https://png.icons8.com/material-rounded/48/000000/user.png">
               </img>
               Who Made Smart Card
@@ -46,7 +46,7 @@ class HomePage extends Component {
              </p>
 
               <h2 className="display-4">
-              <img class="icon-front" alt="Piggy Bank Icon" 
+              <img className="icon-front" alt="Piggy Bank Icon" 
               src="https://png.icons8.com/ios/50/000000/money-box-filled.png">
               </img>
                Is Smart Card Free?

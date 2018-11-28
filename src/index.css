@@ -71,9 +71,6 @@ code {
 
 /*---------------------------------------------------------*/
 
-
-/*---------------------------------------------------------*/
-
 .ameliaIcon {
   background-image: url("./img/amelia-shull.jpg");
   background-size: 100%;
@@ -115,16 +112,16 @@ nav li :hover{
   font-weight: bold;
 }
 
-/* body{
-  background-image: url(img/note-book.jpg);
-  background-repeat: repeat repeat;
-  background-size: fill; 
-} */
-
-.get-started-button{
+.get-started-button, .btn-p {
   background-color: #4b2e83;
   color: white;
 }
+
+.get-started-button:hover, .btn-p:hover {
+  background-color: #b7a57a;
+}
+
+
 
 .why {
   background-image: url(img/book-stack.jpg);
@@ -133,12 +130,15 @@ nav li :hover{
   background-repeat: no-repeat;
   background-position: right;
 }
+
 .jumbotron {
   margin: 1rem;
-  text-align: left;
-  background-color: rgba(255, 255, 255, 0);
-  margin-right: 60%
-  
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.title {
+  display: none;
 }
 
 .background-image{
@@ -158,4 +158,72 @@ nav li :hover{
 
 .icon, .icon-front {
   width: 2rem;
+}
+
+.new-cards {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #b7a57a;
+  padding: 1.5rem;
+  border-radius: .5rem;
+}
+
+.text-input {
+  width: 100%;
+  margin: 1rem;
+}
+
+.btn-group {
+  width: 100%;
+}
+
+.view-button, .submit-button {
+  margin-right: .5rem;
+  margin-top: .75rem;
+}
+
+.submit-button:hover {
+  background-color: #85754d;
+}
+
+.input-card-front {
+  margin-bottom: .5rem;
+}
+
+.my-cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+}
+
+.tool-btn {
+  margin: .5rem;
+}
+
+@media (min-width: 768px) {
+  .icon {
+    display: none;
+  }
+
+  .title {
+    display: inline;
+  }
+
+  .jumbotron {
+    width: 40%;
+    margin-right: auto;
+    margin-left: 0;
+    text-align: left;
+    background-color: transparent;
+  }
+
+  .new-cards {
+    width: 70%;
+  }
 }
