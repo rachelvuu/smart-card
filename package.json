@@ -1,5 +1,6 @@
 {
   "name": "react-project-amelia-and-chris",
+  "homepage": "https://info340b-a18.github.io/react-project-amelia-and-chris/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -14,10 +15,12 @@
     "whatwg-fetch": "^3.0.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject"  
   },
   "eslintConfig": {
     "extends": "react-app"

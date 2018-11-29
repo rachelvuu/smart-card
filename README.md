@@ -6,6 +6,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 * The navigation was kept from Amelias design
 * The ability to edit cards is a new feature we implemented for this project (Incredibly painful to figure out)
 
+Bootstrapped with Create React App 
+
 ## Available Scripts
 
 In the project directory, you can run:
