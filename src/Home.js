@@ -6,6 +6,9 @@ class HomePage extends Component {
   render () {
     return (
       <div className="background-image">
+      <head>
+        <title>Smart Card</title>
+      </head>
         <Header/>    
         <main>
           <section className="why">

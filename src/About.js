@@ -7,6 +7,9 @@ class AboutPage extends Component {
   render () {
     return (
       <div  className="about-background">
+      <head>
+        <title>Smart Card</title>
+      </head>
         <Header/>
         <div className="about-content">
           <h2 className="display-4">About</h2>
