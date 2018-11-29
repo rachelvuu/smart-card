@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Header } from './App';
+import { Header, Footer } from './App';
 import { Link } from 'react-router-dom'
 import 'whatwg-fetch';
 
@@ -9,6 +9,7 @@ class NewCardsPage extends Component {
       <div>
         <Header/>
         <AddCardForm addCard={this.props.addCard}/>
+        <Footer/>
       </div>
     )
   }

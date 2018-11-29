@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Header } from './App';
+import { Header, Footer } from './App';
 import { Link } from 'react-router-dom';
 import { Modal, Button } from 'react-bootstrap';
 
@@ -71,11 +71,6 @@ class MyCardsPage extends Component {
                 <Header/>
                 <div className="form-group my-cards">
                     <h2 className="display-4 my-card-title">My Cards</h2>
-                    <label className="my-cards-info">Your personalized notecards are displayed below.
-                     You can hover over or click them to view the other side of the card.
-                     The edit button lets you change either side of the card! You can also delete
-                     individual cards from here. 
-                     </label>
                     <Tools clearCards={this.props.clearCards} enableEdit={this.enableEdit} disableEdit={this.disableEdit}/>
                     <div className="card-container">
                         {this.props.cards.map((card, i) => {
@@ -83,6 +78,7 @@ class MyCardsPage extends Component {
                         })}
                     </div>
                 </div>
+                <Footer/>
             </div>
         )
     }
@@ -107,7 +103,7 @@ class EditModal extends Component {
             <div className="static-modal">
             <Modal.Dialog>
                 <Modal.Header>
-                <Modal.Title>Edit Card</Modal.Title>
+                    <Modal.Title>Edit Card</Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body>
@@ -179,18 +175,29 @@ class Tools extends Component {
     render() {
         if (!this.state.editTools) { // regular mode
             return(
-                <div className="tools">
-                    <Link to="/new-cards">
-                        <button className="btn btn-p btn-sm tool-btn">Add Cards</button>
-                    </Link>
-                    <button className="btn btn-p btn-sm tool-btn" onClick={this.props.clearCards}> Clear All</button>
-                    <button className="btn btn-p btn-sm tool-btn" onClick={this.enableEdit}>Edit</button>
+                <div className="tool-bar">
+                    <label className="my-cards-info">Your personalized notecards are displayed below.
+                        You can hover over or click them to view the other side of the card.
+                        The edit button lets you change or delete either side of the card!
+                    </label>
+                    <div className="tools">
+                        <Link to="/new-cards">
+                            <button className="btn btn-p btn-sm tool-btn">Add Cards</button>
+                        </Link>
+                        <button className="btn btn-p btn-sm tool-btn" onClick={this.props.clearCards}> Clear All</button>
+                        <button className="btn btn-p btn-sm tool-btn" onClick={this.enableEdit}>Edit</button>
+                    </div>
                 </div>
             )
         } else { // edit mode
             return (
-                <div className="tools">
-                    <button className="btn btn-p btn-sm tool-btn" onClick={this.disableEdit}>Done Editing</button>
+                <div className="tool-bar">
+                    <label>
+                        Click on a card to edit or delete it.
+                    </label>
+                    <div className="tools">
+                        <button className="btn btn-p btn-sm tool-btn" onClick={this.disableEdit}>Done Editing</button>
+                    </div>
                 </div>
             )
         }

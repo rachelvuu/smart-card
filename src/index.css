@@ -71,36 +71,77 @@ code {
 
 /*---------------------------------------------------------*/
 
+.flip-pic {
+  background-color: transparent;
+  perspective: 1000px;
+  height: 250px;
+  width: 250px;
+  margin-top: 3rem;
+}
+
+.flip-pic-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-pic:hover .flip-pic-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-pic-front, .flip-pic-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.flip-pic-front {
+  border-radius: 100%;
+}
+
+.flip-pic-back {
+  border-radius: 100%;
+  background-image: url("./img/i-school.png");
+  background-position: center;
+  background-size: 230px;
+  transform: rotateY(180deg);
+}
+
 .ameliaIcon {
   background-image: url("./img/amelia-shull.jpg");
   background-size: 100%;
-  margin-left: 5%;
-  margin-top: 3rem;
- 
-  
 }
 
 .chrisIcon {
   background-image: url("./img/chris-vitalis.jpg");
   background-size: 100%;
-  margin-left: 5%;
-  
-}
-
-
-.bioPic {
-  height: 250px;
-  width: 250px;
-  border-radius: 100%;
 }
 
 
 .bio-para {
- margin-top: 5%;
-  margin-left: 5%;
-  margin-bottom: 3rem;
+  margin-top: 2rem;
 }
 
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-basis: 50%;
+  margin: 2rem;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 2rem;
+}
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 1rem;
+}
 
 .menu{
   background-color: #4b2e83 ; 
@@ -149,9 +190,9 @@ nav li :hover{
 .jumbotron {
 
   text-align: center;
-  background-color: rgba(255, 255, 255, 0);
+  background-color: rgba(255, 255, 255, 0.6);
   display: inline-block;
-  color: white;
+  color: black;
 }
 
 .jumbotron h2, .jumbotron p{
@@ -162,10 +203,9 @@ nav li :hover{
   display: none;
 }
 
-
-
 .background-image{
   background-image: url(img/note-book.jpg);
+  background-repeat: repeat repeat;
 }
 
 .more-info {
@@ -229,9 +269,20 @@ nav li :hover{
   margin: .5rem;
 }
 
+.tool-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
 @media (min-width: 768px) {
   .icon {
     display: none;
+  }
+
+  .all-bios {
+    display: flex;
   }
 
   .title {
@@ -244,9 +295,10 @@ nav li :hover{
     margin-left: 0;
     text-align: left;
     background-color: transparent;
+    color: white;
   }
 
-  .new-cards, .my-cards-info  {
+  .new-cards, .my-cards-info {
     width: 70%;
   }
 }

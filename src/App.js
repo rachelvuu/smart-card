@@ -98,6 +98,18 @@ export class App extends Component {
   }
 }
 
+export class Footer extends Component {
+  render() {
+    return (
+      <footer>If you have any questions please contact
+        <a href="mailto:ashull@uw.edu"> Amelia Shull</a> or
+        <a href="mailto:cvitalis@uw.edu"> Christopher Vitalis. </a>
+        Key phrases in notecards are from Microsoft's Text Analytics API.
+      </footer>
+    )
+  }
+}
+
 export class Header extends Component {
   render() {
     return (
