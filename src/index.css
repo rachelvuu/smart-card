@@ -74,18 +74,31 @@ code {
 .ameliaIcon {
   background-image: url("./img/amelia-shull.jpg");
   background-size: 100%;
+  margin-left: 5%;
+  margin-top: 3rem;
+ 
   
 }
 
 .chrisIcon {
   background-image: url("./img/chris-vitalis.jpg");
   background-size: 100%;
+  margin-left: 5%;
+  
 }
 
+
 .bioPic {
-  height: 100px;
-  width: 100px;
+  height: 250px;
+  width: 250px;
   border-radius: 100%;
+}
+
+
+.bio-para {
+ margin-top: 5%;
+  margin-left: 5%;
+  margin-bottom: 3rem;
 }
 
 
@@ -118,28 +131,38 @@ nav li :hover{
 }
 
 .get-started-button:hover, .btn-p:hover {
-  background-color: #b7a57a;
+  background-color: #85754d;
 }
 
 
 
 .why {
-  background-image: url(img/book-stack.jpg);
+  background-image: url(https://i.imgur.com/dldBYRG.jpg);
   background-size: cover;
-  padding: 2rem;
+  padding: 5rem;
   background-repeat: no-repeat;
-  background-position: right;
+  background-position: center;
+  text-align: center;
+  
 }
 
 .jumbotron {
-  margin: 1rem;
+
   text-align: center;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0);
+  display: inline-block;
+  color: white;
+}
+
+.jumbotron h2, .jumbotron p{
+  text-align: center;
 }
 
 .title {
   display: none;
 }
+
+
 
 .background-image{
   background-image: url(img/note-book.jpg);
@@ -160,7 +183,7 @@ nav li :hover{
   width: 2rem;
 }
 
-.new-cards {
+.new-cards, .my-cards {
   width: 90%;
   margin-left: auto;
   margin-right: auto;
@@ -199,7 +222,7 @@ nav li :hover{
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1.5rem;
+  padding-top: 1.5rem;
 }
 
 .tool-btn {
@@ -223,7 +246,22 @@ nav li :hover{
     background-color: transparent;
   }
 
-  .new-cards {
+  .new-cards, .my-cards-info  {
     width: 70%;
   }
+}
+
+footer {
+  margin: .5rem;
+  font-size: .75rem;
+  bottom: 0;
+  margin-bottom: 1rem;
+}
+
+body{
+  background-color: #b7a57a;
+}
+
+.wrapper {
+  text-align: center;
 }

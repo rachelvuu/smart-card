@@ -16,9 +16,11 @@ class HomePage extends Component {
                 way to study.
              </p>
             <hr className="my-4"></hr>
+            <div className="wrapper">
             <Link className="get-started-link" to="/new-cards">
-              <button className="btn btn-lg get-started-button">Get Started</button>
+              <button className="btn  get-started-button">Get Started</button>
             </Link> 
+            </div>
           </div>
           </section>
           <section className="more-info">
@@ -56,6 +58,11 @@ class HomePage extends Component {
              </p>
           </section>
       </main>
+      <footer>If you have any questions please contact
+         <a href="mailto:ashull@uw.edu"> Amelia Shull</a> or
+         <a href="mailto:cvitalis@uw.edu"> Christopher Vitalis. </a>
+         Key phrases in notecards are from Microsoft's Text Analytics API.
+      </footer>
     </div>
     )
   }

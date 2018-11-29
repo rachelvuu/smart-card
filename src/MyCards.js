@@ -69,8 +69,13 @@ class MyCardsPage extends Component {
             <div>
                 {editModal}
                 <Header/>
-                <div className="my-cards">
-                    <h2 className="display-4">My Cards</h2>
+                <div className="form-group my-cards">
+                    <h2 className="display-4 my-card-title">My Cards</h2>
+                    <label className="my-cards-info">Your personalized notecards are displayed below.
+                     You can hover over or click them to view the other side of the card.
+                     The edit button lets you change either side of the card! You can also delete
+                     individual cards from here. 
+                     </label>
                     <Tools clearCards={this.props.clearCards} enableEdit={this.enableEdit} disableEdit={this.disableEdit}/>
                     <div className="card-container">
                         {this.props.cards.map((card, i) => {
