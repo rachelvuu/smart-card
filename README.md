@@ -1,5 +1,11 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+* We implemented cards from Both of our projects (we had very similar projects)
+* Our design and colors were pretty different so we decided on creating a new one together (UW Colors)
+* We used Chris's hover to flip the card function 
+* The navigation was kept from Amelias design
+* The ability to edit cards is a new feature we implemented for this project (Incredibly painful to figure out)
+
 ## Available Scripts
 
 In the project directory, you can run:
