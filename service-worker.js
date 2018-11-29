@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/react-project-amelia-and-chris/precache-manifest.a376f9d0298c2e9b24b35332624fb4db.js"
+  "/react-project-amelia-and-chris/precache-manifest.31840b2a172f505b5a85198c7fe506bb.js"
 );
 
 workbox.clientsClaim();

@@ -36,7 +36,7 @@ self.__precacheManifest = [
     "url": "/react-project-amelia-and-chris/static/css/1.fdca7307.chunk.css"
   },
   {
-    "revision": "50c7408c0fca14670fe2f16f37a8b1cb",
+    "revision": "ee8d3be67bdd6af2e2dd4f1296f0f64c",
     "url": "/react-project-amelia-and-chris/index.html"
   }
 ];
