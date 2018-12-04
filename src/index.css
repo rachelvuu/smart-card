@@ -203,16 +203,14 @@ nav li :hover{
   display: none;
 }
 
-.background-image{
-  background-image: url(img/note-book.jpg);
-  background-repeat: repeat repeat;
-}
+
 
 .more-info {
   margin: 2rem;
   text-align: center;
   background-color: #b7a57a;
   padding: 1rem;
+  align-content: center;
 }
 
 .more-info h2, .samples h2 {
@@ -276,6 +274,43 @@ nav li :hover{
   width: 100%;
 }
 
+
+footer {
+  margin: .5rem;
+  font-size: .75rem;
+  bottom: 0;
+  margin-bottom: 1rem;
+}
+
+body{
+  background-color: #b7a57a;
+}
+
+.wrapper {
+  text-align: center;
+}
+
+
+
+.example-text{
+  line-height: 20px;
+  padding-top: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-bottom: 2rem;
+}
+
+.example-card{
+  width: 300px;
+  height: 200px;
+  margin-left: 8rem;
+  margin-right: 8rem;
+}
+
+.example-font{
+  font-weight: 200;
+}
+
 @media (min-width: 768px) {
   .icon {
     display: none;
@@ -301,19 +336,4 @@ nav li :hover{
   .new-cards, .my-cards-info {
     width: 70%;
   }
-}
-
-footer {
-  margin: .5rem;
-  font-size: .75rem;
-  bottom: 0;
-  margin-bottom: 1rem;
-}
-
-body{
-  background-color: #b7a57a;
-}
-
-.wrapper {
-  text-align: center;
 }
