@@ -87,6 +87,12 @@ class SmartModeForm extends Component {
   render() {
     return (
       <div className="text-input">
+        <form>
+          <div clasName="form-group">
+            <label for="exampleFormControlFile1">Example file input</label>
+            <input type="file" className="form-control-file" id="exampleFormControlFile1"/>
+          </div>
+        </form>
         <textarea className="form-control input-card-text" maxLength="5000" rows="4" onChange={this.updateText} value={this.state.text} placeholder="Your notes go here"></textarea>
         <div>
           <button className="btn btn-p btn-sm submit-button" onClick={this.getData}>Submit</button>

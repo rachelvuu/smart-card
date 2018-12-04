@@ -1,6 +1,6 @@
 {
-  "name": "react-project-amelia-and-chris",
-  "homepage": "https://info340b-a18.github.io/react-project-amelia-and-chris",
+  "name": "smart-card",
+  "homepage": "https://info340b-a18.github.io/smart-card",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

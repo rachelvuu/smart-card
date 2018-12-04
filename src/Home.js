@@ -6,10 +6,8 @@ class HomePage extends Component {
   render () {
     return (
       <div className="background-image">
-      <head>
-        <title>Smart Card</title>
-      </head>
-        <Header/>    
+
+        <Header/>
         <main>
           <section className="why">
             <div className="jumbotron">
@@ -62,7 +60,7 @@ class HomePage extends Component {
             </section>
         </main>
         <Footer/>
-    </div>
+      </div>
     )
   }
 }
