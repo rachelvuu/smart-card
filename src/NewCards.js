@@ -72,10 +72,12 @@ class SmartModeForm extends Component {
   constructor() {
     super();
     this.state = {
-      text: ""
+      text: "",
+      img: ""
     }
     this.updateText = this.updateText.bind(this);
     this.getData = this.getData.bind(this);
+    this.uploadFile = this.uploadFile.bind(this);
   }
   
   updateText(event) {
@@ -87,23 +89,77 @@ class SmartModeForm extends Component {
   render() {
     return (
       <div className="text-input">
-        <form>
-          <div clasName="form-group">
-            <label for="exampleFormControlFile1">Example file input</label>
-            <input type="file" className="form-control-file" id="exampleFormControlFile1"/>
+        <form onSubmit={this.uploadFile}>
+          <div className="form-group">
+            <label>Upload a picture of your notes:</label>
+            <input type="file" className="form-control-file" accept="image/*" onChange={this.uploadFile}/>
           </div>
         </form>
         <textarea className="form-control input-card-text" maxLength="5000" rows="4" onChange={this.updateText} value={this.state.text} placeholder="Your notes go here"></textarea>
         <div>
-          <button className="btn btn-p btn-sm submit-button" onClick={this.getData}>Submit</button>
+          <button type="submit" className="btn btn-p btn-sm submit-button" onClick={this.getData}>Submit</button>
           <Link to="/my-cards" className="btn btn-secondary btn-sm my-cards-link view-button">View Cards</Link>
         </div>
       </div>
     )
   }
 
+  uploadFile(event) {
+    if (event.target.files.length > 0) {
+      let reader = new FileReader();
+      let file = event.target.files[0];
+
+      let dataURL = "";
+      reader.onloadend = (e) => {
+        let state = this.state;
+        state.img = reader.result;
+        this.setState(state);
+      }
+      reader.readAsDataURL(file);
+    }
+  }
+
+  getImageData() {
+    let content = {
+      headers: {
+        "Content-Type": "application/json",
+        "Ocp-Apim-Subscription-Key": "e1835b4e4cd54a5ab4ccfae25cc8c37b"
+      },
+      method: "post",
+      data: '{"url": ' + '"' + this.state.img + '"}'
+    };
+
+    let params = {
+      "mode": "Handwritten",
+    };
+
+    window.fetch("https://westcentralus.api.cognitive.microsoft.com/vision/v2.0/recognizeText?" + JSON.stringify(params), content)
+      .then((response) => {
+        console.log(response);
+        return response.text();
+      })  /*
+      .then((response) => {
+        return JSON.parse(response);
+      })
+      .then((response) => {
+        response.documents[0].keyPhrases.forEach((phrase) => {
+          this.props.addCard({front: phrase, back: "Back of card."});
+        });
+        this.setState({text: ""});
+      }) */
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+
   getData() {
     let text = this.state.text.replace(/"/g, '\'');
+
+    if (this.state.img !== "") {
+      text += " " + this.getImageData();
+    }
+
     let content = {
       headers: {
         "Content-Type": "application/json",
