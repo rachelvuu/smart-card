@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Header, Footer } from './App';
-import { chrisBio, ameliaBio } from './bios';
+import { chrisBio, ameliaBio, rachelBio, yuBio } from './bios';
 
 
 class AboutPage extends Component {
@@ -14,8 +14,14 @@ class AboutPage extends Component {
         <div className="about-content">
           <h2 className="display-4">About</h2>
           <div className="all-bios">
+          <div className="group-two">
             <Profile person="amelia" bio={ameliaBio}/>
             <Profile person="chris" bio={chrisBio}/>
+           </div>
+            <div className="group-two">
+            <Profile person="rachel" bio={rachelBio}/>
+            <Profile person="yu-che" bio={yuBio}/>
+            </div>
           </div>
         </div>
         <Footer/>

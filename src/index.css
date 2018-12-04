@@ -121,6 +121,16 @@ code {
   background-size: 100%;
 }
 
+.rachelIcon {
+  background-image : url("./img/rachel-vuu.jpg");
+  background-size: 100%;
+}
+
+.yu-cheIcon {
+  background-image: url("./img/Yu-che.jpg");
+  background-size: 100%;
+}
+
 
 .bio-para {
   margin-top: 2rem;
@@ -311,6 +321,8 @@ body{
   font-weight: 200;
 }
 
+
+
 @media (min-width: 768px) {
   .icon {
     display: none;
@@ -318,7 +330,10 @@ body{
 
   .all-bios {
     display: flex;
+    flex-direction: column;
+    width: 100%;
   }
+  
 
   .title {
     display: inline;
@@ -335,5 +350,10 @@ body{
 
   .new-cards, .my-cards-info {
     width: 70%;
+  }
+
+  .group-two {
+    display: flex;
+    flex-direction: row;
   }
 }
