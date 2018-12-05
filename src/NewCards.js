@@ -78,6 +78,7 @@ class SmartModeForm extends Component {
       text: "",
       img: ""
     }
+    this.storeImageInFirebase = this.storeImageInFirebase.bind(this);
     this.updateText = this.updateText.bind(this);
     this.getData = this.getData.bind(this);
     this.uploadFile = this.uploadFile.bind(this);
@@ -100,7 +101,7 @@ class SmartModeForm extends Component {
         </form>
         <textarea className="form-control input-card-text" maxLength="5000" rows="4" onChange={this.updateText} value={this.state.text} placeholder="Your notes go here"></textarea>
         <div>
-          <button type="submit" className="btn btn-p btn-sm submit-button" onClick={this.getData}>Submit</button>
+          <button type="submit" className="btn btn-p btn-sm submit-button" onClick={(this.state.img === "") ? () => {this.getData("")} : this.storeImageInFirebase}>Submit</button>
           <Link to="/my-cards" className="btn btn-secondary btn-sm my-cards-link view-button">View Cards</Link>
         </div>
       </div>
@@ -112,7 +113,6 @@ class SmartModeForm extends Component {
       let reader = new FileReader();
       let file = event.target.files[0];
 
-      let dataURL = "";
       reader.onloadend = (e) => {
         let state = this.state;
         state.img = reader.result;
@@ -122,17 +122,20 @@ class SmartModeForm extends Component {
     }
   }
 
-  getImageData() {
+  storeImageInFirebase() {
+    let storage = firebase.storage().ref();
+    storage.child("/image").putString(this.state.img, 'data_url');
+    storage.child("/image").getDownloadURL().then((promise) => {
+      this.getImageData(promise);
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+  }
+
+  getImageData(imgURL) {
     //application/json
     //application/octet-stream
-    firebase.initializeApp();
-    let storage = firebase.storage().ref();
-    console.log(storage);
-    storage.putString(this.state.url, 'data_url').then(function(snapshot) {
-      console.log('Uploaded a data_url string!');
-    });
-    /*
-    let url ="";
     let content = {
       headers: {
         "Content-Type": "application/json",
@@ -140,11 +143,11 @@ class SmartModeForm extends Component {
       },
       method: "post",
       body: JSON.stringify({
-        url: 
+        url: imgURL
       })
     };
 
-    let url = "https://westus.api.cognitive.microsoft.com/vision/v2.0/ocr" + "?language=unk&detectOrientation=true"
+    let url = "https://westus.api.cognitive.microsoft.com/vision/v2.0/ocr?language=unk&detectOrientation=true"
     window.fetch(url, content)
       .then((response) => {
         return response.text();
@@ -155,20 +158,28 @@ class SmartModeForm extends Component {
       .then((response) => {
         let text = "";
         console.log(response);
+        response = response.regions.forEach((region) => {
+          region.lines.forEach((element) => {
+            element.words.forEach((element2) => {
+              text += " " + element2.text;
+            });
+          });
+        })
+        this.getData(text);
       })
       .catch((error) => {
         console.log(error);
       });
-      */
   }
 
 
-  getData() {
-    let text = this.state.text.replace(/"/g, '\'');
-
+  getData(text) {
+    text = this.state.text.replace(/"/g, '\'') + " " + text;
+    /*
     if (this.state.img !== "") {
-      text += " " + this.getImageData();
-    }
+      text += " " + this.storeImageInFirebase();
+    }*/
+    console.log(text);
 
     let content = {
       headers: {
