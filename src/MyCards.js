@@ -31,23 +31,24 @@ class MyCardsPage extends Component {
     enableEdit() {
         this.setState({
             editMode: true,
-            cardToEdit: null
+            cardToEdit: null,
         });
     }
 
     disableEdit() {
         this.setState({
             editMode: false,
-            cardToEdit: null
+            cardToEdit: null,
         });
     }
 
     editCard(card) {
+        console.log(card);
         if (this.state.editMode) {
             let editMode = this.state.editMode;
             this.setState({
                 editMode: editMode,
-                cardToEdit: card
+                cardToEdit: card,
             });
         }
     }
@@ -55,7 +56,7 @@ class MyCardsPage extends Component {
     deleteCard(index) {
         this.setState({
             editMode: true,
-            cardToEdit: null
+            cardToEdit: null,
         });
         this.props.deleteCard(index);
     }
@@ -102,6 +103,7 @@ class EditModal extends Component {
     }
 
     render() {
+        console.log(this.props.front);
         return (
             <div className="static-modal">
             <Modal.Dialog>

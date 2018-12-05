@@ -122,16 +122,16 @@ class SmartModeForm extends Component {
   getImageData() {
     //application/json
     //application/octet-stream
-    let data = {
+    let data = JSON.stringify({
       url : this.state.img
-    }
+    });
     let content = {
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/octet-stream",
         "Ocp-Apim-Subscription-Key": "1e00d2a6051b4162bf52c0fbb5424c40"
       },
       method: "post",
-      body: data
+      body: this.state.img
     };
 
     let url = "https://westus.api.cognitive.microsoft.com/vision/v2.0/ocr" + "?language=unk&detectOrientation=true"
