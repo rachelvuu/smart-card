@@ -43,7 +43,6 @@ class MyCardsPage extends Component {
     }
 
     editCard(card) {
-        console.log(card);
         if (this.state.editMode) {
             let editMode = this.state.editMode;
             this.setState({
@@ -192,6 +191,7 @@ class Tools extends Component {
                 </div>
             )
         } else { // edit mode
+            console.log("editing");
             return (
                 <div className="tool-bar">
                     <label>
@@ -207,18 +207,14 @@ class Tools extends Component {
 }
 
 class Card extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            front: props.card.front,
-            back: props.card.back,
-            key: props.num
-        }
-    }
-
     render() {
+        let thisCard = {
+            front: this.props.card.front,
+            back: this.props.card.back,
+            key: this.props.num
+        }
         return (
-            <div className="flip-card" onClick={() => this.props.editCard(this.state)}>
+            <div className="flip-card" onClick={() => this.props.editCard(thisCard)}>
                 <div className="flip-card-inner">
                     <div className="flip-card-front">
                         <p>{this.props.card.front}</p>
