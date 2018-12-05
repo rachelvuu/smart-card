@@ -120,33 +120,32 @@ class SmartModeForm extends Component {
   }
 
   getImageData() {
+    //application/json
+    //application/octet-stream
+    let data = {
+      url : this.state.img
+    }
     let content = {
       headers: {
         "Content-Type": "application/json",
-        "Ocp-Apim-Subscription-Key": "e1835b4e4cd54a5ab4ccfae25cc8c37b"
+        "Ocp-Apim-Subscription-Key": "1e00d2a6051b4162bf52c0fbb5424c40"
       },
       method: "post",
-      data: '{"url": ' + '"' + this.state.img + '"}'
+      body: data
     };
 
-    let params = {
-      "mode": "Handwritten",
-    };
-
-    window.fetch("https://westcentralus.api.cognitive.microsoft.com/vision/v2.0/recognizeText?" + JSON.stringify(params), content)
+    let url = "https://westus.api.cognitive.microsoft.com/vision/v2.0/ocr" + "?language=unk&detectOrientation=true"
+    window.fetch(url, content)
       .then((response) => {
-        console.log(response);
         return response.text();
-      })  /*
+      })
       .then((response) => {
         return JSON.parse(response);
       })
       .then((response) => {
-        response.documents[0].keyPhrases.forEach((phrase) => {
-          this.props.addCard({front: phrase, back: "Back of card."});
-        });
-        this.setState({text: ""});
-      }) */
+        let text = "";
+        console.log(response);
+      })
       .catch((error) => {
         console.log(error);
       });
