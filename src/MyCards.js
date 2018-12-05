@@ -68,9 +68,6 @@ class MyCardsPage extends Component {
         }
         return(
             <div>
-                <head>
-                    <title>Smart Card</title>
-                </head>
                 {editModal}
                 <Header/>
                 <div className="form-group my-cards">

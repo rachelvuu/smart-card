@@ -10,9 +10,6 @@ class NewCardsPage extends Component {
   render () {
     return(
       <div>
-        <head>
-          <title>Smart Card</title>
-        </head>
         <Header/>
         <AddCardForm addCard={this.props.addCard}/>
         <Footer/>
