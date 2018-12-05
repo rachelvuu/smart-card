@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Header, Footer } from './App';
 import { Link } from 'react-router-dom'
 import 'whatwg-fetch';
+import firebase from 'firebase/app';
+import 'firebase/storage';
+
 
 class NewCardsPage extends Component {
   render () {
@@ -122,16 +125,23 @@ class SmartModeForm extends Component {
   getImageData() {
     //application/json
     //application/octet-stream
-    let data = JSON.stringify({
-      url : this.state.img
+    firebase.initializeApp();
+    let storage = firebase.storage().ref();
+    console.log(storage);
+    storage.putString(this.state.url, 'data_url').then(function(snapshot) {
+      console.log('Uploaded a data_url string!');
     });
+    /*
+    let url ="";
     let content = {
       headers: {
-        "Content-Type": "application/octet-stream",
+        "Content-Type": "application/json",
         "Ocp-Apim-Subscription-Key": "1e00d2a6051b4162bf52c0fbb5424c40"
       },
       method: "post",
-      body: this.state.img
+      body: JSON.stringify({
+        url: 
+      })
     };
 
     let url = "https://westus.api.cognitive.microsoft.com/vision/v2.0/ocr" + "?language=unk&detectOrientation=true"
@@ -149,6 +159,7 @@ class SmartModeForm extends Component {
       .catch((error) => {
         console.log(error);
       });
+      */
   }
 
 
