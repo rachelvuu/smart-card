@@ -27,15 +27,15 @@ class HomePage extends Component {
 
             <section className="more-info">
             <div className="card-container">
-              <div class="flip-card">
-                <div class="flip-card-inner">
-                  <div class="flip-card-front example-text">
+              <div className="flip-card">
+                <div className="flip-card-inner">
+                  <div className="flip-card-front example-text">
                   <img className="icon-front" alt="Person Icon" 
                 src="https://png.icons8.com/ios/100/000000/help-filled.png">
                 </img>
                     <h1 className="example-font">What is Smart Card?</h1>
                   </div>
-                    <div class="flip-card-back">
+                    <div className="flip-card-back">
                       <p className="example-text">Smart Card is a website that can be used to help you study. 
                       Just enter in your typed up notes and Smart Card will create 
                       personalized note cards!</p> 
@@ -43,30 +43,30 @@ class HomePage extends Component {
                 </div>
               </div>
 
-              <div class="flip-card example-card">
-                <div class="flip-card-inner">
-                  <div class="flip-card-front example-text">
+              <div className="flip-card example-card">
+                <div className="flip-card-inner">
+                  <div className="flip-card-front example-text">
                   <img className="icon-front" alt="Person Icon" 
                 src="https://png.icons8.com/material-rounded/48/000000/user.png">
                 </img>
                     <h1 className="example-font">Who made Smart Card?</h1>
                   </div>
-                    <div class="flip-card-back">
+                    <div className="flip-card-back">
                       <p className="example-text">Smart Card was developed by Amelia Shull, Rachel Vuu, Yu Che Lin, and
                         Christopher Vitalis in the Informatics major at the University of Washington.</p> 
                     </div>
                 </div>
               </div>
 
-              <div class="flip-card">
-                <div class="flip-card-inner">
-                  <div class="flip-card-front example-text">
+              <div className="flip-card">
+                <div className="flip-card-inner">
+                  <div className="flip-card-front example-text">
                   <img className="icon-front" alt="Person Icon" 
                 src="https://png.icons8.com/ios/50/000000/money-box-filled.png">
                 </img>
                     <h1 className="example-font">Is Smart Card free</h1>
                   </div>
-                    <div class="flip-card-back">
+                    <div className="flip-card-back">
                       <p className="example-text">Yes! Smart Card is 100% free!</p> 
                     </div>
                 </div>
