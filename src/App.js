@@ -45,21 +45,9 @@ export class App extends Component {
     this.saveToDataBase = this.saveToDataBase.bind(this);
   }
 
-  componentDidMount() {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) { // is someone logged in
-        let cards = this.state.cards;
-        if (firebase.database().ref(user.uid) === {}) {
-          cards = firebase.database().ref(this.state.currentUser.uid);
-        }
-        this.setState({
-          cards: cards,
-          currentUser: user
-        });
-      }
-    })
-  }
 
+
+  // Takes in an array of cards
   saveToDataBase(cards) {
     let db = firebase.database().ref(this.state.currentUser.uid);
     db.set({});
