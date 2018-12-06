@@ -6,11 +6,13 @@ import 'firebase/auth';
 import 'firebase/database';
 import {Link} from 'react-router-dom';
 import {Header, Footer} from './App.js';
+import { Modal } from 'react-bootstrap';
+
 
 class FirebaseApp extends Component {
   constructor(props) {
     super(props);
-    this.state={toggle: false};
+    this.state={toggle: false, errorMessage: null};
   }
 
   componentDidMount() {
@@ -18,20 +20,21 @@ class FirebaseApp extends Component {
       if (user) {
         this.setState({
           user: user,
-          loading: false
+          loading: false,
+          errorMessage: null
         });
       } else {
         this.setState( { user: null, loading:false } );
       }
-    })
+    });
 
     this.authUnregFunc = firebase.auth().onAuthStateChanged((user) => {
       if(user){
-        console.log('logged in');
+        //console.log('logged in');
         this.setState({user: user})
       }
       else {
-        console.log('logged out');
+        //console.log('logged out');
       }});
     }
     
@@ -55,13 +58,18 @@ class FirebaseApp extends Component {
       });
     }
 
+    resolveError() {
+      this.setState({
+        errorMessage: null
+      });
+    }
     
     handleSignIn(email, password) {
       this.setState({errorMessage:null});
 
       firebase.auth().signInWithEmailAndPassword(email, password)
         .catch((err) => {
-          console.log(err.message);
+          this.setState({errorMessage: err.message});
         })
     }
 
@@ -80,6 +88,11 @@ class FirebaseApp extends Component {
     }
 
     render() {
+      let modal;
+      if (this.state.errorMessage !== null) {
+        modal = <ErrorModal resolveError={() => this.resolveError()} errorMessage={this.state.errorMessage}></ErrorModal>;
+      }
+
       let content=null;
       if (this.state.user != null) {
         content = (
@@ -103,6 +116,7 @@ class FirebaseApp extends Component {
       }
         return (
           <div>
+              {modal}
               <Header/>
               {content}
               <Footer/>
@@ -266,6 +280,27 @@ class SignUpForm extends Component {
           </form>
         </div>
       )
+    }
+  }
+class ErrorModal extends Component {
+    render() {
+      return (
+          <div className="static-modal">
+            <Modal.Dialog>
+                <Modal.Header>
+                    <Modal.Title>Error</Modal.Title>
+                </Modal.Header>
+  
+                <Modal.Body>
+                    <p>{this.props.errorMessage}</p>
+                </Modal.Body>
+  
+                <Modal.Footer>
+                    <button className="btn btn-p" onClick={this.props.resolveError}>Okay</button>
+                </Modal.Footer>
+            </Modal.Dialog>
+          </div>
+      );
     }
   }
 

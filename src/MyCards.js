@@ -91,12 +91,14 @@ class MyCardsPage extends Component {
         }
 
         let cards = this.props.cards;
-        
+        let tools = <Tools clearCards={this.props.clearCards} enableEdit={this.enableEdit} disableEdit={this.disableEdit}/>
+
         if (this.state.currentUser === null) {
             cards = [{
                 front: "Sign in to save your cards!",
                 back: ":)"
             }];
+            tools = <div></div>;
         }
 
         return(
@@ -105,7 +107,7 @@ class MyCardsPage extends Component {
                 <Header/>
                 <div className="form-group my-cards">
                     <h2 className="display-4 my-card-title">My Cards</h2>
-                    <Tools clearCards={this.props.clearCards} enableEdit={this.enableEdit} disableEdit={this.disableEdit}/>
+                    {tools}
                     <div className="card-container">
                         {cards.map((card, i) => {
                             return <Card key={i} num={i} card={card} editCard={this.editCard}/>

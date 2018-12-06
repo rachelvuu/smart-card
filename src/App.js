@@ -37,13 +37,6 @@ export class App extends Component {
     this.deleteCard = this.deleteCard.bind(this);
     this.saveToDataBase = this.saveToDataBase.bind(this);
   }
-  /*
-amitRef.on('value', (snapshot) => {
-    let amitValue = snapshot.val();
-    console.log(amitValue); //=> { age: 35, petName: "Spot" }
-    //can do something else with amitValue (e.g., assign with this.setState())
-});
-  */
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
@@ -247,3 +240,4 @@ class UserNav extends Component {
     });
   }
 }
+
