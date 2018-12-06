@@ -111,7 +111,7 @@ export class Footer extends Component {
       <footer>If you have any questions please contact
         <a href="mailto:ashull@uw.edu"> Amelia Shull</a> or
         <a href="mailto:cvitalis@uw.edu"> Christopher Vitalis. </a>
-        Key phrases in notecards are from Microsoft's Text Analytics API.
+        Key phrases in notecards are from Microsoft's Text Analytics and Computer Vision API's.
       </footer>
     )
   }
@@ -122,7 +122,7 @@ export class Header extends Component {
     return (
         <header className="menu d-flex justify-content-between align-items-center">
         <Link className="home-link" to="/home">
-          <h1 className="display-4 title">Smart Card</h1>
+          <h1 className="title">Smart Card</h1>
           <img className="icon" alt="Graphic of a notepad icon" src="https://img.icons8.com/metro/52/b7a57a/note.png"></img>
         </Link>
         <nav>
@@ -136,7 +136,7 @@ export class Header extends Component {
             <li className="nav-item">
               <Link className="nav-link about-link" to="/about">About</Link>
             </li>
-            <li classNme="nav-item">
+            <li className="nav-item">
               <Link className="nav-link" to="/login">Login/Sign up</Link>
             </li>
           </ul>
