@@ -8,7 +8,6 @@ import {Link} from 'react-router-dom';
 import {Header, Footer, ErrorModal} from './App.js';
 
 
-
 class FirebaseApp extends Component {
   constructor(props) {
     super(props);
