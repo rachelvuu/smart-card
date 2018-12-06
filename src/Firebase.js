@@ -183,10 +183,8 @@ class SignUpForm extends Component {
   
           {/* buttons */}
           <div className="form-group">
-            <button className="btn btn-primary mr-2" 
-              onClick={(e) => this.handleSignUp(e)}
-            >
-              Sign-up
+            <button className="btn btn-primary mr-2" onClick={(e) => this.handleSignUp(e)}>
+              <Link to="/">Sign up</Link>
             </button>
           </div>
         </form>
@@ -247,10 +245,10 @@ class SignUpForm extends Component {
   
           {/* buttons */}
           <div className="form-group">
-            <button className="btn btn-primary"
-              onClick={(e) => this.handleSignIn(e)}
-            >
-              Sign-in
+            <button className="btn btn-primary" onClick={(e) => this.handleSignIn(e)}>
+              <Link to="/">
+                Log in
+              </Link>
             </button>
           </div>
         </form>
