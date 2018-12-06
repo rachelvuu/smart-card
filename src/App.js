@@ -4,6 +4,7 @@ import HomePage from './Home';
 import AboutPage from './About';
 import NewCardsPage from './NewCards';
 import MyCardsPage from './MyCards';
+import FirebaseApp from './Firebase';
 
 
 /* An array of card objects
@@ -92,6 +93,9 @@ export class App extends Component {
           <Route path='/my-cards' render={(routerProps) => (
             <MyCardsPage {...routerProps} cards={this.state.cards} clearCards={this.clearCards} updateCard={this.updateCard} deleteCard={this.deleteCard}/>
           )}/>
+
+          <Route path='/login' component={FirebaseApp}/>
+
           <Route path="*" component={HomePage}/>
         </Switch>
 
@@ -131,6 +135,9 @@ export class Header extends Component {
             </li>
             <li className="nav-item">
               <Link className="nav-link about-link" to="/about">About</Link>
+            </li>
+            <li classNme="nav-item">
+              <Link className="nav-link" to="/login">Login/Sign up</Link>
             </li>
           </ul>
         </nav>
