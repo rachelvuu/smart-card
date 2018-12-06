@@ -11,39 +11,49 @@ class FirebaseApp extends Component {
         this.state={ };
     }
 
-    handleSignUp(email, password) {
+    componentDidMount() {
+      firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+              this.setState({
+                  user: user,
+                  loading: false
+              });
+          } else {
+              this.setState( { user: null, loading:false } );
+          }
+      })
+
+      this.authUnregFunc = firebase.auth().onAuthStateChanged((user) => {
+        if(user){
+          console.log('logged in');
+          this.setState({user: user})
+        }
+        else {
+          console.log('logged out');
+        }
+      });
+    }
+    
+    componentWillUnmount() {
+      this.authUnregFunc();
+    }
+    
+
+    handleSignUp(email, password, handle) {
         this.setState({errorMessage:null});
 
         firebase.auth().createUserWithEmailAndPassword(email, password)
+          .then(() => {
+            let profilePromise = firebase.auth().currentUser.updateProfile({
+              displayName: handle
+            });
+            return profilePromise;
+          })
           .catch((err) => {
             this.setState({errorMessage: err.message});
         });
     }
 
-    componentDidMount() {
-        firebase.auth().onAuthStateChanged((user) => {
-            if (user) {
-                this.setState({
-                    user: user,
-                    loading: false
-                });
-            } else {
-                this.setState( { user: null, loading:false } );
-            }
-        })
-
-        this.authUnregFunc = firebase.auth().onAuthStateChanged((user) => {
-          if(user){
-              this.setState({user: user})
-          }
-          else {
-          }
-        });
-      }
-    
-      componentWillUnmount() {
-        this.authUnregFunc();
-      }
     
       handleSignIn(email, password) {
         this.setState({errorMessage:null});
@@ -65,7 +75,7 @@ class FirebaseApp extends Component {
     
     render() {
         return (<div>
-            <SignUpForm signUpCallback={(e,p) => this.handleSignUp(e,p)} 
+            <SignUpForm signUpCallback={(e,p,h) => this.handleSignUp(e,p,h)} 
               signInCallback={(e,p) => this.handleSignIn(e,p)}/>
         </div>);
         //user stuff: <SignupForm/>
@@ -92,7 +102,8 @@ class SignUpForm extends Component {
   
       this.state = {
         'email': undefined,
-        'password': undefined
+        'password': undefined,
+        'handle': undefined
       }; 
     }
   
@@ -109,7 +120,7 @@ class SignUpForm extends Component {
     //handle signUp button
     handleSignUp(event) {
       event.preventDefault(); //don't submit
-      this.props.signUpCallback(this.state.email, this.state.password);
+      this.props.signUpCallback(this.state.email, this.state.password, this.state.handle);
     }
   
     //handle signIn button
@@ -139,6 +150,16 @@ class SignUpForm extends Component {
               id="password" 
               type="password"
               name="password"
+              onChange={(e) => this.handleChange(e)}
+              />
+          </div>
+
+          {/* handle */}
+          <div className="form-group">
+            <label htmlFor="handle">Handle</label>
+            <input className="form-control" 
+              id="handle" 
+              name="handle"
               onChange={(e) => this.handleChange(e)}
               />
           </div>
