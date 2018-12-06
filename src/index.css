@@ -90,8 +90,8 @@ code {
 
 /* Style the back side */
 .flip-card-back {
-  background-color: lightslategray;
-  color: white;
+  background-color: white;
+  color: black;
   transform: rotateY(180deg);
 }
 
@@ -191,11 +191,25 @@ code {
 
 .menu :hover{
 text-decoration: none;
-color: #a24bcf;
+  color: #a24bcf;
 }
 
 nav li :hover{
-color: #a24bcf;
+  color: #a24bcf;
+}
+
+.sign-in, .log-out {
+  color: #a24bcf;
+}
+
+.link {
+  color: white;
+}
+
+.link:hover {
+  color:white;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 .get-started-button, .btn-p {
@@ -210,9 +224,7 @@ color: #a24bcf;
 }
 
 
-
 .why {
-  background-color: rgba(255, 255, 255, 0.4);
   background-size: cover;
   padding: 5rem;
   background-repeat: no-repeat;
@@ -221,7 +233,6 @@ color: #a24bcf;
 }
 
 .jumbotron {
-
   text-align: center;
   background-color: rgba(255, 255, 255, 0.6);
   display: inline-block;
@@ -256,7 +267,7 @@ color: #a24bcf;
   width: 2rem;
 }
 
-.new-cards, .my-cards {
+.new-cards, .my-cards, .sign-in-page, .about-content, .welcome-message {
   width: 90%;
   margin-left: auto;
   margin-right: auto;
@@ -267,6 +278,25 @@ color: #a24bcf;
   color: white;
   padding: 1.5rem;
   border-radius: .5rem;
+}
+
+.sign-in-page {
+  min-height: 30rem;
+}
+
+.sign-in-page p {
+  color: black;
+}
+
+  
+.form-text{
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.forms {
+  margin-top: 2rem;
 }
 
 .text-input {
@@ -381,7 +411,6 @@ footer {
     margin-right: auto;
     margin-left: 0;
     text-align: left;
-    background-color: transparent;
     color: #4b79cf;
   }
 
@@ -400,25 +429,5 @@ footer {
 
   .get-started-button {
     border-radius: 100px;
-  }
-
-  .forms {
-    width: 20%;
-    color: white;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .forms-button{
-    background-color: #a24bcf;
-    color: white;
-    text-decoration: none;
-  }
-  
-  .form-text{
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
   }
 }

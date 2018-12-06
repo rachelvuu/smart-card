@@ -152,7 +152,7 @@ amitRef.on('value', (snapshot) => {
             <MyCardsPage {...routerProps} currentUser={this.state.currentUser} cards={this.state.cards} clearCards={this.clearCards} updateCard={this.updateCard} deleteCard={this.deleteCard}/>
           )}/>
 
-          <Route path='/login' component={FirebaseApp}/>
+          <Route path='/signin' component={FirebaseApp}/>
 
           <Route path="*" component={HomePage}/>
         </Switch>
@@ -167,8 +167,7 @@ export class Footer extends Component {
   render() {
     return (
       <footer>If you have any questions please contact
-        <a href="mailto:ashull@uw.edu"> Amelia Shull</a> or
-        <a href="mailto:cvitalis@uw.edu"> Christopher Vitalis. </a>
+        <a className="link" href="mailto:info.340.smart.card@gmail.com"> Smart Card's creators</a>.
         Key phrases in notecards are from Microsoft's Text Analytics and Computer Vision API's.
       </footer>
     )
@@ -229,9 +228,9 @@ class UserNav extends Component {
 
   render() {
     if(this.state.user != null) {
-      return(<Link className="nav-link log-out" to="/login" onClick={this.signOut}>Log Out</Link>);
+      return(<Link className="nav-link log-out" to="/signin" onClick={this.signOut}>Log Out</Link>);
     } else {
-      return(<Link className="nav-link" to="/login">Login/Sign Up</Link>);
+      return(<Link className="nav-link sign-in" to="/signin">Sign In</Link>);
     }
   }
 

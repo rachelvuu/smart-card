@@ -16,12 +16,12 @@ class FirebaseApp extends Component {
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-          this.setState({
-              user: user,
-              loading: false
-          });
+        this.setState({
+          user: user,
+          loading: false
+        });
       } else {
-          this.setState( { user: null, loading:false } );
+        this.setState( { user: null, loading:false } );
       }
     })
 
@@ -81,18 +81,23 @@ class FirebaseApp extends Component {
 
     render() {
       let content=null;
-      if (this.state.toggle === false) {
+      if (this.state.user != null) {
         content = (
-          <div>
+        <div className="sign-in-page">
+          <h2 className="display-4">Welcome {this.state.user.displayName}!</h2>
+        </div>);
+      } else if (this.state.toggle === false) {
+        content = (
+          <div className="sign-in-page">
               <SignInForm signInCallback={(e,p) => this.handleSignIn(e,p)}/>
-              <p className="form-text">Don't have an account? <Link to="/login" onClick={() => this.toggleState()}>Sign up.</Link></p>
+              <p className="form-text">Don't have an account? <Link className="link" to="/signin" onClick={() => this.toggleState()}>Sign up.</Link></p>
           </div>
         );
       } else {
         content = (
-          <div>
+          <div className="sign-in-page">
             <SignUpForm signUpCallback={(e,p,h) => this.handleSignUp(e,p,h)}/>
-            <p className="form-text">Already have an account? <Link to="/login" onClick={() => this.toggleState()}>Sign in.</Link></p>
+            <p className="form-text">Already have an account? <Link className="link" to="/signin" onClick={() => this.toggleState()}>Sign in.</Link></p>
           </div>
         );
       }
@@ -151,48 +156,50 @@ class SignUpForm extends Component {
   
     render() {
       return (
-        <form>
-          {/* email */}
-          <div className="forms">
-          <h1>Sign Up</h1>
-          <div className="form-group">
-            <input className="form-control" placeholder="Email"
-              id="email" 
-              type="email" 
-              name="email"
-              onChange={(e) => this.handleChange(e)}
-              />
-          </div>
-          
-          {/* password */}
-          <div className="form-group">
-            <input className="form-control" placeholder="Password"
-              id="password" 
-              type="password"
-              name="password"
-              onChange={(e) => this.handleChange(e)}
-              />
-          </div>
+        <div>
+          <form>
+            <h2 className="display-4">Sign Up</h2>
+            <div className="forms">
+              {/* email */}
+              <div className="form-group">
+                <input className="form-control" placeholder="Email"
+                  id="email" 
+                  type="email" 
+                  name="email"
+                  onChange={(e) => this.handleChange(e)}
+                  />
+              </div>
+              
+              {/* password */}
+              <div className="form-group">
+                <input className="form-control" placeholder="Password"
+                  id="password" 
+                  type="password"
+                  name="password"
+                  onChange={(e) => this.handleChange(e)}
+                  />
+              </div>
 
-          {/* handle */}
-          <div className="form-group">
-            <input className="form-control" placeholder="Handle"
-              id="handle" 
-              name="handle"
-              onChange={(e) => this.handleChange(e)}
-              />
-          </div>
-  
-          {/* buttons */}
-          <div className="form-group">
-            <Link to="/">
-              <button className="btn  mr-2 get-started-button btn-p" onClick={(e) => this.handleSignUp(e)}>
-                Sign up
-              </button>
-            </Link>
-          </div>
-          </div>
-        </form>
+              {/* handle */}
+              <div className="form-group">
+                <input className="form-control" placeholder="Handle"
+                  id="handle" 
+                  name="handle"
+                  onChange={(e) => this.handleChange(e)}
+                  />
+              </div>
+      
+              {/* buttons */}
+              <div className="form-group">
+                <Link to="/">
+                  <button className="btn  mr-2 get-started-button btn-p" onClick={(e) => this.handleSignUp(e)}>
+                    Sign up
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </form>
+        </div>
       )
     }
   }
@@ -225,38 +232,39 @@ class SignUpForm extends Component {
   
     render() {
       return (
-        <form>
-          {/* email */}
-          <div className="forms">
-          <h1>Log In</h1>
-          <div className="form-group">
-            <input className="form-control" placeholder="Email" 
-              id="email" 
-              type="email" 
-              name="email"
-              onChange={(e) => this.handleChange(e)}
-              />
-          </div>
-          
-          {/* password */}
-          <div className="form-group">
-           
-            <input className="form-control" placeholder="Password"
-              id="password" 
-              type="password"
-              name="password"
-              onChange={(e) => this.handleChange(e)}
-              />
-          </div>
-  
-          {/* buttons */}
-          <div className="form-group">
-            <Link to="/">
-              <button className="btn get-started-button btn-p" onClick={(e) => this.handleSignIn(e)}>Log in</button>
-            </Link>
-          </div>
-          </div>
-        </form>
+        <div>
+          <form>
+            <h2 className="display-4">Sign In</h2>
+            <div className="forms">
+              {/* email */}
+              <div className="form-group">
+                <input className="form-control" placeholder="Email" 
+                  id="email" 
+                  type="email" 
+                  name="email"
+                  onChange={(e) => this.handleChange(e)}
+                />
+              </div>
+              
+              {/* password */}
+              <div className="form-group">
+                <input className="form-control" placeholder="Password"
+                  id="password" 
+                  type="password"
+                  name="password"
+                  onChange={(e) => this.handleChange(e)}
+                />
+              </div>
+      
+              {/* buttons */}
+              <div className="form-group">
+                <Link to="/home">
+                  <button className="btn get-started-button btn-p" onClick={(e) => this.handleSignIn(e)}>Log in</button>
+                </Link>
+              </div>
+            </div>
+          </form>
+        </div>
       )
     }
   }
