@@ -62,6 +62,11 @@ amitRef.on('value', (snapshot) => {
             });
           }
         });
+      } else {
+        this.setState({
+          cards: [],
+          currentUser: null
+        })
       }
     })
   }

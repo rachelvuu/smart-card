@@ -7,12 +7,12 @@ import firebase from 'firebase/app';
 
 
 class MyCardsPage extends Component {
-    constructor(props) {
+    constructor() {
         super();
         this.state = {
             editMode: false,
             cardToEdit: null,
-            cards: props.cards
+            currentUser: null
         }
         this.editCard = this.editCard.bind(this);
         this.enableEdit = this.enableEdit.bind(this);
@@ -21,12 +21,31 @@ class MyCardsPage extends Component {
         this.deleteCard = this.deleteCard.bind(this);
     }
 
+    componentDidMount() {
+        firebase.auth().onAuthStateChanged((user) => {
+          if (user) { // is someone logged in
+            this.setState({
+                editMode: false,
+                cardToEdit: null,
+                currentUser: user
+            })
+          } else {
+            this.setState({
+                editMode: false,
+                cardToEdit: null,
+                currentUser: null
+            })
+          }
+        })
+    }
+
     updateCard(card) {
         this.props.updateCard(card);
 
         this.setState({
             editMode: true,
             cardToEdit: null,
+            currentUser: this.state.currentUser
         });
     }
 
@@ -34,6 +53,7 @@ class MyCardsPage extends Component {
         this.setState({
             editMode: true,
             cardToEdit: null,
+            currentUser: this.state.currentUser
         });
     }
 
@@ -50,6 +70,7 @@ class MyCardsPage extends Component {
             this.setState({
                 editMode: editMode,
                 cardToEdit: card,
+                currentUser: this.state.currentUser
             });
         }
     }
@@ -58,19 +79,26 @@ class MyCardsPage extends Component {
         this.setState({
             editMode: true,
             cardToEdit: null,
+            currentUser: this.state.currentUser
         });
         this.props.deleteCard(index);
     }
 
     render() {
-        let cards =[];
-        if (this.props.user != null) {
-            cards = firebase.database().ref(this.state.currentUser.uid);
-        }
         let editModal = <div/>;
         if (this.state.cardToEdit != null) {
             editModal = <EditModal num={this.state.cardToEdit.key} front={this.state.cardToEdit.front} back={this.state.cardToEdit.back} updateCard={this.updateCard} deleteCard={this.deleteCard}></EditModal>
         }
+
+        let cards = this.props.cards;
+        
+        if (this.state.currentUser === null) {
+            cards = [{
+                front: "Sign in to save your cards!",
+                back: ":)"
+            }];
+        }
+
         return(
             <div>
                 {editModal}
@@ -79,7 +107,7 @@ class MyCardsPage extends Component {
                     <h2 className="display-4 my-card-title">My Cards</h2>
                     <Tools clearCards={this.props.clearCards} enableEdit={this.enableEdit} disableEdit={this.disableEdit}/>
                     <div className="card-container">
-                        {this.props.cards.map((card, i) => {
+                        {cards.map((card, i) => {
                             return <Card key={i} num={i} card={card} editCard={this.editCard}/>
                         })}
                     </div>
@@ -129,7 +157,7 @@ class EditModal extends Component {
     updateFront(event) {
         this.setState({
             front: event.target.value,
-            back: this.state.back
+            back: this.state.back,
         });
     }
 
