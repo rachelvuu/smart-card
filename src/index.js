@@ -11,7 +11,7 @@ import firebase from 'firebase/app';
 // Learn more about service workers: http://bit.ly/CRA-PWA
 
   // Initialize Firebase
-  /*var config = {
+  var config = {
     apiKey: "AIzaSyCWZvZjwVRVWruqYsThTkn5u6HRA97pP2U",
     authDomain: "smart-card-340.firebaseapp.com",
     databaseURL: "https://smart-card-340.firebaseio.com",
@@ -19,7 +19,7 @@ import firebase from 'firebase/app';
     storageBucket: "smart-card-340.appspot.com",
     messagingSenderId: "265233874128"
   };
-  firebase.initializeApp(config);*/
+  firebase.initializeApp(config);
 
   //ReactDOM.render(<FirebaseApp />, document.getElementById('root'));
   ReactDOM.render(<App />, document.getElementById('root'));

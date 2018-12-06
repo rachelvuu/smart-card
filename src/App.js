@@ -62,7 +62,10 @@ export class App extends Component {
 
   deleteCard(index) {
     let cards = this.state.cards;
-    cards.splice(index, 1);
+    for (let i = index; i < cards.length - 1; i++) {
+      cards[i] = cards[i + 1];
+    }
+    cards.pop();
     this.setState({
       cards: cards
     });

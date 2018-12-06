@@ -31,14 +31,14 @@ class MyCardsPage extends Component {
     enableEdit() {
         this.setState({
             editMode: true,
-            cardToEdit: null
+            cardToEdit: null,
         });
     }
 
     disableEdit() {
         this.setState({
             editMode: false,
-            cardToEdit: null
+            cardToEdit: null,
         });
     }
 
@@ -47,7 +47,7 @@ class MyCardsPage extends Component {
             let editMode = this.state.editMode;
             this.setState({
                 editMode: editMode,
-                cardToEdit: card
+                cardToEdit: card,
             });
         }
     }
@@ -55,7 +55,7 @@ class MyCardsPage extends Component {
     deleteCard(index) {
         this.setState({
             editMode: true,
-            cardToEdit: null
+            cardToEdit: null,
         });
         this.props.deleteCard(index);
     }
@@ -67,9 +67,6 @@ class MyCardsPage extends Component {
         }
         return(
             <div>
-                <head>
-                    <title>Smart Card</title>
-                </head>
                 {editModal}
                 <Header/>
                 <div className="form-group my-cards">
@@ -102,6 +99,7 @@ class EditModal extends Component {
     }
 
     render() {
+        console.log(this.props.front);
         return (
             <div className="static-modal">
             <Modal.Dialog>
@@ -193,6 +191,7 @@ class Tools extends Component {
                 </div>
             )
         } else { // edit mode
+            console.log("editing");
             return (
                 <div className="tool-bar">
                     <label>
@@ -208,18 +207,14 @@ class Tools extends Component {
 }
 
 class Card extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            front: props.card.front,
-            back: props.card.back,
-            key: props.num
-        }
-    }
-
     render() {
+        let thisCard = {
+            front: this.props.card.front,
+            back: this.props.card.back,
+            key: this.props.num
+        }
         return (
-            <div className="flip-card" onClick={() => this.props.editCard(this.state)}>
+            <div className="flip-card" onClick={() => this.props.editCard(thisCard)}>
                 <div className="flip-card-inner">
                     <div className="flip-card-front">
                         <p>{this.props.card.front}</p>
