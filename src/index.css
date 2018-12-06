@@ -47,9 +47,17 @@ code {
 }
 
 .top-row, .middle-row, .bottom-row {
-  display:flex;
-  justify-content: space-between;
-  width: 100%;
+  display: none;
+}
+
+.icon-front {
+  opacity: .5;
+}
+
+.small-home {
+  display: flex;
+  flex-direction: column;
+  align-items:center;
 }
 
 /* Card container */
@@ -372,9 +380,10 @@ footer {
 .example-text{
   line-height: 20px;
   padding-top: 2rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
   padding-bottom: 2rem;
+  color: #a24bcf;
 }
 
 .example-font{
@@ -421,7 +430,6 @@ footer {
   
 
   .jumbotron {
-    width: 30%;
     margin-right: auto;
     margin-left: auto;
     text-align: left;
@@ -443,5 +451,22 @@ footer {
 
   .get-started-button {
     border-radius: 100px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .jumbotron {
+    width: 30%;
+  }
+
+  .top-row, .middle-row, .bottom-row {
+    display:flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  .small-home {
+    display:none;
   }
 }

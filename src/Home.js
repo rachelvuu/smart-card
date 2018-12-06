@@ -7,7 +7,7 @@ class HomePage extends Component {
     let exampleCards = [
       {
         img: (<img className="icon-front" alt="Person Icon" 
-          src="https://png.icons8.com/ios/100/000000/help-filled.png"></img>),
+        src="https://img.icons8.com/ios-glyphs/50/000000/help.png"></img>),
         front : (<h1 className="example-font">What is Smart Card?</h1>),
         back: (<p className="example-text back-text-1">Smart Card is a website that can be used to help you study. 
           Just enter in your typed up notes and Smart Card will create 
@@ -52,6 +52,14 @@ class HomePage extends Component {
       <div className="background-image">
         <Header/>
         <main className="home-page">
+          <div className="small-home">
+            {jumbotron}
+            <div className="card-container">
+              <ExampleCard card={exampleCards[0]}></ExampleCard>
+              <ExampleCard card={exampleCards[1]}></ExampleCard>
+              <ExampleCard card={exampleCards[2]}></ExampleCard>
+            </div>
+          </div>
           <div className="top-row">
             <ExampleCard card={exampleCards[0]}></ExampleCard>
             <ExampleCard card={exampleCards[3]}></ExampleCard>
