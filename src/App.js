@@ -13,11 +13,13 @@ import 'firebase/database';
 cards: [
   {
     front: "front of card",
-    back: "back of card"
+    back: "back of card",
+    ref: [reference to db]
   },
   {
     front: "front",
-    back: "back"
+    back: "back",
+    ref: [ref to db]
   }
 ]
 */
@@ -49,7 +51,8 @@ export class App extends Component {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) { // is someone logged in
         let cards = this.state.cards;
-        if (firebase.database().ref(user.uid) === {}) {
+        if (firebase.database().ref(user.uid) === null) {
+          console.log("test");
           cards = firebase.database().ref(this.state.currentUser.uid);
         }
         this.setState({
@@ -117,6 +120,7 @@ export class App extends Component {
   }
 
   render() {
+
     return(
      
       <BrowserRouter>
@@ -135,7 +139,7 @@ export class App extends Component {
           
           {/* if currentUrl == '/my-caards', render <MyCardsPage> */}
           <Route path='/my-cards' render={(routerProps) => (
-            <MyCardsPage {...routerProps} cards={this.state.cards} clearCards={this.clearCards} updateCard={this.updateCard} deleteCard={this.deleteCard}/>
+            <MyCardsPage {...routerProps} currentUser={this.state.currentUser} cards={this.state.cards} clearCards={this.clearCards} updateCard={this.updateCard} deleteCard={this.deleteCard}/>
           )}/>
 
           <Route path='/login' component={FirebaseApp}/>
@@ -181,11 +185,51 @@ export class Header extends Component {
               <Link className="nav-link about-link" to="/about">About</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/login">Login/Sign up</Link>
+              <UserNav></UserNav>
+            </li>
+            <li>
+
             </li>
           </ul>
         </nav>
       </header>
     );
+  }
+}
+
+class UserNav extends Component {
+  constructor() {
+    super();
+    this.state = {
+      user: null
+    }
+    this.signOut = this.signOut.bind(this);
+  }
+
+  signOut() {
+    firebase.auth().signOut()
+    .catch((err) => {
+      this.setState({errorMessage: err.message});
+    })
+
+    this.setState({
+      user: null
+    });
+  }
+
+  render() {
+    if(this.state.user != null) {
+      return(<Link className="nav-link log-out" to="/login" onClick={this.signOut}>Log Out</Link>);
+    } else {
+      return(<Link className="nav-link" to="/login">Login/Sign Up</Link>);
+    }
+  }
+
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if(user) {
+        this.setState({user: user});
+      }
+    });
   }
 }
