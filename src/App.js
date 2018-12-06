@@ -5,6 +5,8 @@ import AboutPage from './About';
 import NewCardsPage from './NewCards';
 import MyCardsPage from './MyCards';
 import FirebaseApp from './Firebase';
+import firebase from 'firebase/app';
+import 'firebase/database';
 
 
 /* An array of card objects
@@ -12,33 +14,66 @@ cards: [
   {
     front: "front of card",
     back: "back of card"
+  },
+  {
+    front: "front",
+    back: "back"
   }
 ]
 */
 export class App extends Component {
   constructor() {
+    let cards =  [
+      {
+        front: "Example Card",
+        back: "Back of example card"
+      },
+      {
+        front: "We worked really hard on this project",
+        back: "I hope you can tell"
+      }
+    ];
     super();
     this.state = {
-      cards: [
-        {
-          front: "Example Card",
-          back: "Back of example card"
-        },
-        {
-          front: "We worked really hard on this project",
-          back: "I hope you can tell"
-        }
-      ]
+      cards: cards,
+      currentUser: null
     };
     this.addCard = this.addCard.bind(this);
     this.clearCards = this.clearCards.bind(this);
     this.updateCard = this.updateCard.bind(this);
     this.deleteCard = this.deleteCard.bind(this);
+    this.saveToDataBase = this.saveToDataBase.bind(this);
+  }
+
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) { // is someone logged in
+        let cards = this.state.cards;
+        if (firebase.database().ref(user.uid) === {}) {
+          cards = firebase.database().ref(this.state.currentUser.uid);
+        }
+        this.setState({
+          cards: cards,
+          currentUser: user
+        });
+      }
+    })
+  }
+
+  saveToDataBase(cards) {
+    let db = firebase.database().ref(this.state.currentUser.uid);
+    db.set({});
+    cards.forEach((card) => {
+      db.push(card);
+    });
   }
 
   addCard(newCard) {
     let cards = this.state.cards;
     cards.push(newCard);
+    if (this.state.currentUser != null) {
+      this.saveToDataBase(cards);
+    }
     this.setState({
       cards: cards
     });
@@ -50,12 +85,18 @@ export class App extends Component {
       front: card.front,
       back: card.back
     }
+    if (this.state.currentUser != null) {
+      this.saveToDataBase(cards);
+    }
     this.setState({
       cards: cards
     });
   }
 
   clearCards() {
+    if (this.state.currentUser != null) {
+      this.saveToDataBase([]);
+    }
     this.setState({
       cards: []
     })
@@ -67,6 +108,9 @@ export class App extends Component {
       cards[i] = cards[i + 1];
     }
     cards.pop();
+    if (this.state.currentUser != null) {
+      this.saveToDataBase(cards);
+    }
     this.setState({
       cards: cards
     });

@@ -28,7 +28,6 @@ class AboutPage extends Component {
 }
 
 class Profile extends Component {
-  let
   render(){
     return (
       <div className="profile">
