@@ -19,7 +19,7 @@ class HomePage extends Component {
               <hr className="my-4"></hr>
               <div className="wrapper">
               <Link className="get-started-link" to="/new-cards">
-                <button className="btn  get-started-button">Get Started</button>
+                <button className="btn get-started-button">Get Started</button>
               </Link> 
               </div>
             </div>
@@ -64,7 +64,7 @@ class HomePage extends Component {
                   <img className="icon-front" alt="Person Icon" 
                 src="https://png.icons8.com/ios/50/000000/money-box-filled.png">
                 </img>
-                    <h1 className="example-font">Is Smart Card free</h1>
+                    <h1 className="example-font">Is Smart Card free?</h1>
                   </div>
                     <div className="flip-card-back">
                       <p className="example-text back-text-3">Yes! Smart Card is 100% free!</p> 

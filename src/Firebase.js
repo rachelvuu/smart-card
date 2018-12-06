@@ -5,6 +5,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 import {Link} from 'react-router-dom';
+import {Header, Footer} from './App.js';
 
 class FirebaseApp extends Component {
   constructor(props) {
@@ -84,20 +85,22 @@ class FirebaseApp extends Component {
         content = (
           <div>
               <SignInForm signInCallback={(e,p) => this.handleSignIn(e,p)}/>
-              <p>Don't have an account? <Link to="/login" onClick={() => this.toggleState()}>Sign up.</Link></p>
+              <p className="form-text">Don't have an account? <Link to="/login" onClick={() => this.toggleState()}>Sign up.</Link></p>
           </div>
         );
       } else {
         content = (
           <div>
             <SignUpForm signUpCallback={(e,p,h) => this.handleSignUp(e,p,h)}/>
-            <p>Already have an account? <Link to="/login" onClick={() => this.toggleState()}>Sign in.</Link></p>
+            <p className="form-text">Already have an account? <Link to="/login" onClick={() => this.toggleState()}>Sign in.</Link></p>
           </div>
         );
       }
         return (
           <div>
+              <Header/>
               {content}
+              <Footer/>
           </div>
         );
 
@@ -150,9 +153,10 @@ class SignUpForm extends Component {
       return (
         <form>
           {/* email */}
+          <div className="forms">
+          <h1>Sign Up</h1>
           <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input className="form-control" 
+            <input className="form-control" placeholder="Email"
               id="email" 
               type="email" 
               name="email"
@@ -162,8 +166,7 @@ class SignUpForm extends Component {
           
           {/* password */}
           <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input className="form-control" 
+            <input className="form-control" placeholder="Password"
               id="password" 
               type="password"
               name="password"
@@ -173,8 +176,7 @@ class SignUpForm extends Component {
 
           {/* handle */}
           <div className="form-group">
-            <label htmlFor="handle">Handle</label>
-            <input className="form-control" 
+            <input className="form-control" placeholder="Handle"
               id="handle" 
               name="handle"
               onChange={(e) => this.handleChange(e)}
@@ -183,9 +185,12 @@ class SignUpForm extends Component {
   
           {/* buttons */}
           <div className="form-group">
-            <button className="btn btn-primary mr-2" onClick={(e) => this.handleSignUp(e)}>
-              <Link to="/">Sign up</Link>
-            </button>
+            <Link to="/">
+              <button className="btn btn-primary mr-2 get-started-button" onClick={(e) => this.handleSignUp(e)}>
+                Sign up
+              </button>
+            </Link>
+          </div>
           </div>
         </form>
       )
@@ -222,9 +227,10 @@ class SignUpForm extends Component {
       return (
         <form>
           {/* email */}
+          <div className="forms">
+          <h1>Log In</h1>
           <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input className="form-control" 
+            <input className="form-control" placeholder="Email" 
               id="email" 
               type="email" 
               name="email"
@@ -234,8 +240,8 @@ class SignUpForm extends Component {
           
           {/* password */}
           <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input className="form-control" 
+           
+            <input className="form-control" placeholder="Password"
               id="password" 
               type="password"
               name="password"
@@ -245,11 +251,12 @@ class SignUpForm extends Component {
   
           {/* buttons */}
           <div className="form-group">
-            <button className="btn btn-primary" onClick={(e) => this.handleSignIn(e)}>
-              <Link to="/">
+              <Link className="get-started-link" to="/">
+              <button className="btn btn-primary get-started-button" onClick={(e) => this.handleSignIn(e)}>
                 Log in
+                </button>
               </Link>
-            </button>
+          </div>
           </div>
         </form>
       )

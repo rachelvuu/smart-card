@@ -8,7 +8,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
   background: linear-gradient(-45deg, #a24bcf, #4b79cf, #4bc5cf);
-	background-size: 400% 400%;
+  background-size: 1000% 1000%;
+
 	-webkit-animation: Gradient 60s ease infinite;
 	-moz-animation: Gradient 60s ease infinite;
 	animation: Gradient 60s ease infinite;
@@ -190,32 +191,33 @@ code {
 
 .menu :hover{
 text-decoration: none;
+color: #a24bcf;
 }
 
 nav li :hover{
-  color: white;
-  font-weight: bold;
+color: #a24bcf;
 }
 
 .get-started-button, .btn-p {
-  background-color: #4b2e83;
+  background-color: #a24bcf;
   color: white;
+  border-radius: 100;
 }
 
 .get-started-button:hover, .btn-p:hover {
-  background-color: #85754d;
+  background-color:  white;
+  color: #a24bcf
 }
 
 
 
 .why {
-  background-image: url(https://i.imgur.com/dldBYRG.jpg);
+  background-color: rgba(255, 255, 255, 0.4);
   background-size: cover;
   padding: 5rem;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: 20%;
   text-align: center;
-  
 }
 
 .jumbotron {
@@ -223,7 +225,7 @@ nav li :hover{
   text-align: center;
   background-color: rgba(255, 255, 255, 0.6);
   display: inline-block;
-  color: black;
+  color:#4b79cf;
 }
 
 .jumbotron h2, .jumbotron p{
@@ -380,7 +382,7 @@ footer {
     margin-left: 0;
     text-align: left;
     background-color: transparent;
-    color: white;
+    color: #4b79cf;
   }
 
   .new-cards, .my-cards-info {
@@ -394,5 +396,29 @@ footer {
 
   .back-text-1, .back-text-2{
     padding-top: 3rem;
-}
+  }
+
+  .get-started-button {
+    border-radius: 100px;
+  }
+
+  .forms {
+    width: 20%;
+    color: white;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .forms-button{
+    background-color: #a24bcf;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .form-text{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
