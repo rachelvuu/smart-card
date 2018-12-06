@@ -63,6 +63,10 @@ class MyCardsPage extends Component {
     }
 
     render() {
+        let cards =[];
+        if (this.props.user != null) {
+            cards = firebase.database().ref(this.state.currentUser.uid);
+        }
         let editModal = <div/>;
         if (this.state.cardToEdit != null) {
             editModal = <EditModal num={this.state.cardToEdit.key} front={this.state.cardToEdit.front} back={this.state.cardToEdit.back} updateCard={this.updateCard} deleteCard={this.deleteCard}></EditModal>

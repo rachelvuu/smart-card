@@ -25,16 +25,7 @@ cards: [
 */
 export class App extends Component {
   constructor() {
-    let cards =  [
-      {
-        front: "Example Card",
-        back: "Back of example card"
-      },
-      {
-        front: "We worked really hard on this project",
-        back: "I hope you can tell"
-      }
-    ];
+    let cards =  [];
     super();
     this.state = {
       cards: cards,
@@ -46,21 +37,37 @@ export class App extends Component {
     this.deleteCard = this.deleteCard.bind(this);
     this.saveToDataBase = this.saveToDataBase.bind(this);
   }
+  /*
+amitRef.on('value', (snapshot) => {
+    let amitValue = snapshot.val();
+    console.log(amitValue); //=> { age: 35, petName: "Spot" }
+    //can do something else with amitValue (e.g., assign with this.setState())
+});
+  */
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) { // is someone logged in
-        let cards = this.state.cards;
-        if (firebase.database().ref(user.uid) === null) {
-          console.log("test");
-          cards = firebase.database().ref(this.state.currentUser.uid);
-        }
-        this.setState({
-          cards: cards,
-          currentUser: user
+        let ref = firebase.database().ref(user.uid);
+        ref.on('value', (snapshot) => {
+          if (snapshot.val() != null) {
+            this.setState({
+              cards: snapshot.val(),
+              currentUser: user
+            });
+          } else {
+            this.setState({
+              cards: [],
+              currentUser: user
+            });
+          }
         });
       }
     })
+  }
+
+  componentWillUnmount() {
+    firebase.database().ref(this.state.currentUser.uid).off();
   }
 
 
@@ -75,10 +82,10 @@ export class App extends Component {
 
   addCard(newCard) {
     let cards = this.state.cards;
+    let key = this.state.cards.length;
+    newCard.key = key;
     cards.push(newCard);
-    if (this.state.currentUser != null) {
-      this.saveToDataBase(cards);
-    }
+    firebase.database().ref(this.state.currentUser.uid + "/" + key).set(newCard);
     this.setState({
       cards: cards
     });
@@ -88,10 +95,11 @@ export class App extends Component {
     let cards = this.state.cards;
     cards[card.key] = {
       front: card.front,
-      back: card.back
+      back: card.back,
+      key: card.key
     }
     if (this.state.currentUser != null) {
-      this.saveToDataBase(cards);
+      firebase.database().ref(this.state.currentUser.uid + "/" + card.key).set(card);
     }
     this.setState({
       cards: cards
