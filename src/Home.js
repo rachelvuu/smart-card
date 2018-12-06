@@ -25,35 +25,50 @@ class HomePage extends Component {
           src="https://png.icons8.com/ios/50/000000/money-box-filled.png"></img>),
         front: (<h1 className="example-font">Is Smart Card free?</h1>),
         back: (<p className="example-text back-text-3">Yes! Smart Card is 100% free!</p>)
+      },
+      {
+        img: "",
+        front: "",
+        back: ""
       }
     ];
+
+    let jumbotron = (
+      <div className="jumbotron">
+        <h2 className="display-4">Smart Card</h2>
+          <p className="lead">The 
+            <em> new </em>
+            way to study.
+        </p>
+        <hr className="my-4"></hr>
+        <div className="wrapper">
+        <Link className="get-started-link" to="/new-cards">
+          <button className="btn get-started-button">Get Started</button>
+        </Link> 
+        </div>
+      </div>
+    );
     return (
       <div className="background-image">
         <Header/>
-        <main>
-          <section className="why">
-            <div className="jumbotron">
-              <h2 className="display-4">Smart Card</h2>
-                <p className="lead">The 
-                  <em> new </em>
-                  way to study.
-              </p>
-              <hr className="my-4"></hr>
-              <div className="wrapper">
-              <Link className="get-started-link" to="/new-cards">
-                <button className="btn get-started-button">Get Started</button>
-              </Link> 
-              </div>
-            </div>
-            </section>
+        <main className="home-page">
+          <div className="top-row">
+            <ExampleCard card={exampleCards[0]}></ExampleCard>
+            <ExampleCard card={exampleCards[3]}></ExampleCard>
+            <ExampleCard card={exampleCards[3]}></ExampleCard>
+          </div>
 
-          <section className="more-info">
-            <div className="card-container">
-              <ExampleCard card={exampleCards[0]}></ExampleCard>
-              <ExampleCard card={exampleCards[1]}></ExampleCard>
-              <ExampleCard card={exampleCards[2]}></ExampleCard>
-            </div>{/* End card container*/}
-          </section>
+          <div className="middle-row">
+            <ExampleCard card={exampleCards[3]}></ExampleCard>
+            {jumbotron}
+            <ExampleCard card={exampleCards[2]}></ExampleCard>
+          </div>
+
+          <div className="bottom-row">
+            <ExampleCard card={exampleCards[3]}></ExampleCard>
+            <ExampleCard card={exampleCards[1]}></ExampleCard>
+            <ExampleCard card={exampleCards[3]}></ExampleCard>
+          </div>
         </main>
         <Footer/>
       </div>
@@ -64,7 +79,7 @@ class HomePage extends Component {
 class ExampleCard extends Component {
   render() {
     return(
-      <div className="flip-card">
+      <div className="flip-card example-card">
         <div className="flip-card-inner">
           <div className="flip-card-front example-text">
             {this.props.card.img}
