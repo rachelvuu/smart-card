@@ -61,7 +61,7 @@ class FirebaseApp extends Component {
 
       firebase.auth().signInWithEmailAndPassword(email, password)
         .catch((err) => {
-          this.setState({errorMessage: err.message});
+          console.log(err.message);
         })
     }
 
@@ -186,7 +186,7 @@ class SignUpForm extends Component {
           {/* buttons */}
           <div className="form-group">
             <Link to="/">
-              <button className="btn btn-primary mr-2 get-started-button" onClick={(e) => this.handleSignUp(e)}>
+              <button className="btn  mr-2 get-started-button btn-p" onClick={(e) => this.handleSignUp(e)}>
                 Sign up
               </button>
             </Link>
@@ -251,11 +251,9 @@ class SignUpForm extends Component {
   
           {/* buttons */}
           <div className="form-group">
-              <Link className="get-started-link" to="/">
-              <button className="btn btn-primary get-started-button" onClick={(e) => this.handleSignIn(e)}>
-                Log in
-                </button>
-              </Link>
+            <Link to="/">
+              <button className="btn get-started-button btn-p" onClick={(e) => this.handleSignIn(e)}>Log in</button>
+            </Link>
           </div>
           </div>
         </form>

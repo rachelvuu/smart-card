@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Header, Footer } from './App';
 import { Link } from 'react-router-dom';
 import { Modal, Button } from 'react-bootstrap';
+import firebase from 'firebase/app';
+
 
 
 class MyCardsPage extends Component {
@@ -99,7 +101,6 @@ class EditModal extends Component {
     }
 
     render() {
-        console.log(this.props.front);
         return (
             <div className="static-modal">
             <Modal.Dialog>
@@ -191,7 +192,6 @@ class Tools extends Component {
                 </div>
             )
         } else { // edit mode
-            console.log("editing");
             return (
                 <div className="tool-bar">
                     <label>
