@@ -6,6 +6,7 @@ import NewCardsPage from './NewCards';
 import MyCardsPage from './MyCards';
 import FirebaseApp from './Firebase';
 import firebase from 'firebase/app';
+import { Modal } from 'react-bootstrap';
 import 'firebase/database';
 
 
@@ -238,6 +239,28 @@ class UserNav extends Component {
         this.setState({user: user});
       }
     });
+  }
+}
+
+export class ErrorModal extends Component {
+  render() {
+    return (
+        <div className="static-modal">
+          <Modal.Dialog>
+              <Modal.Header>
+                  <Modal.Title>Error</Modal.Title>
+              </Modal.Header>
+
+              <Modal.Body>
+                  <p>{this.props.errorMessage}</p>
+              </Modal.Body>
+
+              <Modal.Footer>
+                  <button className="btn btn-p" onClick={this.props.resolveError}>Okay</button>
+              </Modal.Footer>
+          </Modal.Dialog>
+        </div>
+    );
   }
 }
 

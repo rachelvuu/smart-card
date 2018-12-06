@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Header, Footer } from './App';
+import { Header, Footer, ErrorModal } from './App';
 import { Link } from 'react-router-dom'
 import 'whatwg-fetch';
 import firebase from 'firebase/app';
@@ -7,14 +7,53 @@ import 'firebase/storage';
 
 
 class NewCardsPage extends Component {
+  constructor() {
+    super();
+    this.state = {currentUser: null, submit: false};
+  }
   render () {
+    let modal;
+    if (this.state.currentUser === null && this.state.submit) {
+      let message = "You must be logged in to create new cards."
+      modal = <ErrorModal errorMessage={message} resolveError={() => this.resolveError()}></ErrorModal>
+    }
     return(
       <div>
+        {modal}
         <Header/>
-        <AddCardForm addCard={this.props.addCard}/>
+        <AddCardForm checkLoggedIn={() => this.checkLoggedIn()} addCard={this.props.addCard}/>
         <Footer/>
       </div>
     )
+  }
+
+  checkLoggedIn() {
+    this.setState({
+      currentUser: this.state.currentUser,
+      submit: true
+    })
+    return this.state.currentUser;
+  }
+
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) { // is someone logged in
+        this.setState({
+            currentUser: user
+        })
+      } else {
+        this.setState({
+            currentUser: null
+        })
+      }
+    })
+}
+
+  resolveError() {
+    this.setState({
+      currentUser: this.state.currentUser,
+      submit: false
+    })
   }
 }
 
@@ -37,10 +76,10 @@ class AddCardForm extends Component {
           add into notecards for you. <em>Classic mode</em> will turn each individual entry into its own card.
         </label>
         <div className="btn-group" role="group" aria-label="Note card mode">
-          <button type="button" className="btn btn-sm btn-secondary active smart-mode" onClick={this.toggleSmartMode}>Smart Mode</button>
+          <button type="button" className="btn btn-sm btn-secondary smart-mode" onClick={this.toggleSmartMode}>Smart Mode</button>
           <button type="button" className="btn btn-sm btn-secondary classic-mode" onClick={this.toggleClassicMode}>Classic Mode</button>
         </div>
-        <Form smartMode={this.state.smartMode} addCard={this.props.addCard}></Form>
+        <Form checkLoggedIn={this.props.checkLoggedIn} smartMode={this.state.smartMode} addCard={this.props.addCard}></Form>
       </div>
     )
   }
@@ -61,9 +100,9 @@ class AddCardForm extends Component {
 class Form extends Component {
   render() {
     if (this.props.smartMode) {
-      return (<SmartModeForm addCard={this.props.addCard}/>)
+      return (<SmartModeForm checkLoggedIn={this.props.checkLoggedIn} addCard={this.props.addCard}/>)
     } else {
-      return (<ClassicModeForm addCard={this.props.addCard}/>)
+      return (<ClassicModeForm checkLoggedIn={this.props.checkLoggedIn} addCard={this.props.addCard}/>)
     }
   }
 }
@@ -120,14 +159,16 @@ class SmartModeForm extends Component {
   }
 
   storeImageInFirebase() {
-    let storage = firebase.storage().ref();
-    storage.child("/image").putString(this.state.img, 'data_url');
-    storage.child("/image").getDownloadURL().then((promise) => {
-      this.getImageData(promise);
-    })
-    .catch((error) => {
-      console.log(error.message);
-    });
+    if (this.props.checkLoggedIn() != null) {
+      let storage = firebase.storage().ref();
+      storage.child("/image").putString(this.state.img, 'data_url');
+      storage.child("/image").getDownloadURL().then((promise) => {
+        this.getImageData(promise);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+    }
   }
 
   getImageData(imgURL) {
@@ -171,47 +212,44 @@ class SmartModeForm extends Component {
 
 
   getData(text) {
-    text = this.state.text.replace(/"/g, '\'') + " " + text;
-    /*
-    if (this.state.img !== "") {
-      text += " " + this.storeImageInFirebase();
-    }*/
-    console.log(text);
+    if (this.props.checkLoggedIn() != null) {
+      text = this.state.text.replace(/"/g, '\'') + " " + text;
 
-    let content = {
-      headers: {
-        "Content-Type": "application/json",
-        "Ocp-Apim-Subscription-Key": "2796f530ee7443179bf560163b62a158"
-      },
-      method: "post",
-      body: 
-        JSON.stringify({
-          documents: [
-            {
-              language: "en",
-              id: "1",
-              text: text
-            }
-          ]
+      let content = {
+        headers: {
+          "Content-Type": "application/json",
+          "Ocp-Apim-Subscription-Key": "2796f530ee7443179bf560163b62a158"
+        },
+        method: "post",
+        body: 
+          JSON.stringify({
+            documents: [
+              {
+                language: "en",
+                id: "1",
+                text: text
+              }
+            ]
+          })
+      };
+
+      window.fetch("https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/keyPhrases", content)
+        .then((response) => {
+          return response.text();
         })
-    };
-
-    window.fetch("https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/keyPhrases", content)
-      .then((response) => {
-        return response.text();
-      })
-      .then((response) => {
-        return JSON.parse(response);
-      })
-      .then((response) => {
-        response.documents[0].keyPhrases.forEach((phrase) => {
-          this.props.addCard({front: phrase, back: "Back of card."});
+        .then((response) => {
+          return JSON.parse(response);
+        })
+        .then((response) => {
+          response.documents[0].keyPhrases.forEach((phrase) => {
+            this.props.addCard({front: phrase, back: "Back of card."});
+          });
+          this.setState({text: ""});
+        })
+        .catch((error) => {
+          console.log(error);
         });
-        this.setState({text: ""});
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    }
   }
 }
 
@@ -243,6 +281,7 @@ class ClassicModeForm extends Component {
   render() {
     let inputFront = (<textarea className="form-control input-card-front" maxLength="5000" rows="4" placeholder="Front of card" onChange={this.updateFront} value={this.state.front}></textarea>);
     let inputBack = (<textarea className="form-control input-card-back" maxLength="5000" rows="4" placeholder="Back of card" onChange={this.updateBack} value={this.state.back}></textarea>);
+    
     return(
       <div className="text-input">
         {inputFront}
@@ -256,15 +295,17 @@ class ClassicModeForm extends Component {
   }
 
   addCard() {
-    let newCard = {
-      front: this.state.front,
-      back: this.state.back
+    if (this.props.checkLoggedIn() != null) {
+      let newCard = {
+        front: this.state.front,
+        back: this.state.back
+      }
+      this.props.addCard(newCard);
+      this.setState({
+        front: '',
+        back: ''
+      });
     }
-    this.props.addCard(newCard);
-    this.setState({
-      front: '',
-      back: ''
-    });
   }
 }
 

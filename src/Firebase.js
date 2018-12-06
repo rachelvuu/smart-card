@@ -5,8 +5,8 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 import {Link} from 'react-router-dom';
-import {Header, Footer} from './App.js';
-import { Modal } from 'react-bootstrap';
+import {Header, Footer, ErrorModal} from './App.js';
+
 
 
 class FirebaseApp extends Component {
@@ -280,27 +280,6 @@ class SignUpForm extends Component {
           </form>
         </div>
       )
-    }
-  }
-class ErrorModal extends Component {
-    render() {
-      return (
-          <div className="static-modal">
-            <Modal.Dialog>
-                <Modal.Header>
-                    <Modal.Title>Error</Modal.Title>
-                </Modal.Header>
-  
-                <Modal.Body>
-                    <p>{this.props.errorMessage}</p>
-                </Modal.Body>
-  
-                <Modal.Footer>
-                    <button className="btn btn-p" onClick={this.props.resolveError}>Okay</button>
-                </Modal.Footer>
-            </Modal.Dialog>
-          </div>
-      );
     }
   }
 
