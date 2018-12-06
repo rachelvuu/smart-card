@@ -36,14 +36,14 @@ class HomePage extends Component {
                     <h1 className="example-font">What is Smart Card?</h1>
                   </div>
                     <div className="flip-card-back">
-                      <p className="example-text">Smart Card is a website that can be used to help you study. 
+                      <p className="example-text back-text-1">Smart Card is a website that can be used to help you study. 
                       Just enter in your typed up notes and Smart Card will create 
                       personalized note cards!</p> 
                     </div>
                 </div>
               </div>
 
-              <div className="flip-card example-card">
+              <div className="flip-card">
                 <div className="flip-card-inner">
                   <div className="flip-card-front example-text">
                   <img className="icon-front" alt="Person Icon" 
@@ -52,7 +52,7 @@ class HomePage extends Component {
                     <h1 className="example-font">Who made Smart Card?</h1>
                   </div>
                     <div className="flip-card-back">
-                      <p className="example-text">Smart Card was developed by Amelia Shull, Rachel Vuu, Yu Che Lin, and
+                      <p className="example-text back-text-2">Smart Card was developed by Amelia Shull, Rachel Vuu, Yu Che Lin, and
                         Christopher Vitalis in the Informatics major at the University of Washington.</p> 
                     </div>
                 </div>
@@ -67,7 +67,7 @@ class HomePage extends Component {
                     <h1 className="example-font">Is Smart Card free</h1>
                   </div>
                     <div className="flip-card-back">
-                      <p className="example-text">Yes! Smart Card is 100% free!</p> 
+                      <p className="example-text back-text-3">Yes! Smart Card is 100% free!</p> 
                     </div>
                 </div>
               </div>

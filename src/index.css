@@ -321,6 +321,13 @@ body{
   font-weight: 200;
 }
 
+.back-text-1, .back-text-2{
+  padding-top: 2.5rem;
+}
+
+.back-text-3{
+  padding-top: 5.5rem;
+}
 
 
 @media (min-width: 768px) {
@@ -356,4 +363,8 @@ body{
     display: flex;
     flex-direction: row;
   }
+
+.back-text-1, .back-text-2{
+  padding-top: 3rem;
+}
 }
