@@ -203,16 +203,20 @@ code {
   padding: .5rem;
 }
 
+.menu h1, .nav-link  {
+  color: #4b79cf;
+}
+
 .menu :hover{
 text-decoration: none;
   color: #a24bcf;
 }
 
-.nav-link p:hover{
+nav li :hover{
   color: #a24bcf;
 }
 
-.sign-in p, .log-out p {
+.sign-in, .log-out {
   color: #a24bcf;
 }
 
@@ -234,7 +238,7 @@ text-decoration: none;
 
 .get-started-button:hover, .btn-p:hover {
   background-color:  white;
-  color: #a24bcf;
+  color: #a24bcf
 }
 
 
@@ -260,26 +264,12 @@ text-decoration: none;
 
 .title {
   display: none;
-  color: #4b79cf;
 }
 
-.title:hover{
-  color: #a24bcf;
-}
-
-.home-link:hover{
-  text-decoration: none;
-}
-
-.nav-link p{
+.nav-items{
   font-weight: bold;
-  color: #4b79cf;
-  display: inline;
 }
 
-.sign-in p, .log-out p {
-  color: #a24bcf;
-}
 
 .more-info {
   margin: 2rem;
@@ -370,6 +360,8 @@ text-decoration: none;
 
 
 footer {
+  background-color: white;
+  position: fixed;
   margin: .5rem;
   font-size: .75rem;
   bottom: 0;
