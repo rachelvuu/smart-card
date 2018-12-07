@@ -13,6 +13,7 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1",
+    "react-spinners": "^0.4.7",
     "reactstrap": "^6.5.0",
     "whatwg-fetch": "^3.0.0"
   },
