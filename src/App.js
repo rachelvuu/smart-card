@@ -131,9 +131,9 @@ export class App extends Component {
   render() {
 
     return(
-     
+    
       <BrowserRouter>
-      
+
         <Switch>
           {/* if currentUrl == '/home', render <HomePage> */}
           <Route path="/home" component={HomePage}/>
@@ -147,7 +147,7 @@ export class App extends Component {
 
           
           {/* if currentUrl == '/my-caards', render <MyCardsPage> */}
-          <Route path='/my-cards' render={(routerProps) => (
+          <Route path='/my-cards:username' render={(routerProps) => (
             <MyCardsPage {...routerProps} currentUser={this.state.currentUser} cards={this.state.cards} clearCards={this.clearCards} updateCard={this.updateCard} deleteCard={this.deleteCard}/>
           )}/>
 
@@ -172,6 +172,7 @@ export class Footer extends Component {
     )
   }
 }
+//"/new-cards" + (this.props.currentUser == null ? "" : currentUser.displayName)
 
 export class Header extends Component {
   render() {
@@ -179,7 +180,7 @@ export class Header extends Component {
         <header className="menu d-flex justify-content-between align-items-center">
         <Link className="home-link" to="/home">
           <h1 className="title">Smart Card</h1>
-          <img className="icon" alt="Graphic of a notepad icon" src="https://img.icons8.com/metro/52/b7a57a/note.png"></img>
+          <img className="icon" alt="Graphic of a notepad icon" src="https://img.icons8.com/metro/52/a24bcf/note.png"></img>
         </Link>
         <nav class="navbar navbar-expand-lg">
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -191,7 +192,7 @@ export class Header extends Component {
                 <Link className="nav-link new-cards-link-nav" to="/new-cards">New Cards</Link>
               </li>
               <li className="nav-item active">
-                <Link className="nav-link active my-cards-link" to="/my-cards">My Cards</Link>
+                <Link className="nav-link active my-cards-link" to={"/new-cards" + (this.props.currentUser == null ? "" : currentUser.displayName)}>My Cards</Link>
               </li>
               <li className="nav-item active">
                 <Link className="nav-link about-link" to="/about">About</Link>

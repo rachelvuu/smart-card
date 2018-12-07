@@ -104,7 +104,7 @@ class MyCardsPage extends Component {
         return(
             <div>
                 {editModal}
-                <Header/>
+                <Header currentUser={this.state.currentUser}/>
                 <div className="form-group my-cards">
                     <h2 className="display-4 my-card-title">My Cards</h2>
                     {tools}
@@ -250,10 +250,10 @@ class Card extends Component {
         return (
             <div className="flip-card" onClick={() => this.props.editCard(thisCard)}>
                 <div className="flip-card-inner">
-                    <div className="flip-card-front">
+                    <div className="flip-card-front my-card-text">
                         <p>{this.props.card.front}</p>
                     </div>
-                    <div className="flip-card-back">
+                    <div className="flip-card-back my-card-text">
                         <p>{this.props.card.back}</p>
                     </div>
                 </div>

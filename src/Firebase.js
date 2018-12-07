@@ -9,11 +9,14 @@ import {Header, Footer, ErrorModal} from './App.js';
 import { css } from 'react-emotion';
 import { ClipLoader } from 'react-spinners';
 
+<<<<<<< HEAD
 const override = css`
   display: block;
   margin: 0 auto;
   border-color: red;
 `;
+=======
+>>>>>>> 68f30da3b4a76522d34b081c09718dbb12d31e41
 
 class FirebaseApp extends Component {
   constructor(props) {
@@ -104,6 +107,9 @@ class FirebaseApp extends Component {
         content = (
         <div className="sign-in-page">
           <h2 className="display-4">Welcome {this.state.user.displayName}!</h2>
+          <Link to="/new-cards">
+            <button className="btn btn-p get-started-button">Make new cards!</button>
+          </Link>
         </div>);
       } else if (this.state.toggle === false) {
         content = (
