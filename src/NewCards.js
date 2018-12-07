@@ -115,7 +115,8 @@ class SmartModeForm extends Component {
       text: "",
       img: "",
       currentUser: null,
-      loading: false
+      loading: false,
+      createdCard: false
     }
     this.storeImageInFirebase = this.storeImageInFirebase.bind(this);
     this.updateText = this.updateText.bind(this);
@@ -129,6 +130,20 @@ class SmartModeForm extends Component {
     this.setState(state);
   }
 
+  componentDidUpdate() {
+    if (this.state.createdCard) {
+      setTimeout(() => {
+        this.setState({
+          text: this.state.text,
+          img: this.state.img,
+          currentUser: this.state.currentUser,
+          loading: this.state.loading,
+          createdCard: false
+        });
+      }, 500);
+    }
+  }
+
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
       this.setState({loading:false});
@@ -137,12 +152,14 @@ class SmartModeForm extends Component {
             text: this.state.text,
             img: this.state.img,
             currentUser: user,
+            createdCard: this.state.createdCard
         })
       } else {
         this.setState({
             text: this.state.text,
             img: this.state.img,
             currentUser: null,
+            createdCard: this.state.createdCard
         })
       }
     })
@@ -156,6 +173,7 @@ class SmartModeForm extends Component {
         <div className="spinner"></div>
       </div>);
     }
+    let success = (this.state.createdCard ? "btn btn-sm btn-p success" : "btn btn-sm btn-p submit-button");
     return (
       <div className="text-input">
         {spinnerRender}
@@ -168,11 +186,7 @@ class SmartModeForm extends Component {
         <textarea className="form-control input-card-text" maxLength="5000" rows="4" onChange={this.updateText} readOnly={this.state.loading} value={this.state.text} placeholder="Your notes go here"></textarea>
         <div>
           <button type="submit" className="btn btn-p btn-sm submit-button" onClick={(this.state.img === "") ? () => {this.getData("")} : this.storeImageInFirebase}>Submit</button>
-          <Link to={"/my-cards/" + (this.state.currentUser == null ? "Guest" : this.state.currentUser.displayName)} className="my-cards-link">
-            <button className="btn btn-sm btn-p submit-button">
-             View Cards
-            </button>
-          </Link>
+          <Link to={"/my-cards/" + (this.state.currentUser == null ? "Guest" : this.state.currentUser.displayName)} className={success}>View Cards</Link>
         </div>
       </div>
     )
@@ -194,7 +208,7 @@ class SmartModeForm extends Component {
 
   storeImageInFirebase() {
     if (this.props.checkLoggedIn() != null) {
-      this.setState({loading:true}); //console.log("yeet")
+      this.setState({loading:true}); 
       let storage = firebase.storage().ref();
       storage.child("/image").putString(this.state.img, 'data_url');
       storage.child("/image").getDownloadURL().then((promise) => {
@@ -283,7 +297,7 @@ class SmartModeForm extends Component {
         .catch((error) => {
           console.log(error);
         }).then(() => {
-          this.setState({loading:false});
+          this.setState({loading:false, createdCard: true});
         });
     }
   }
