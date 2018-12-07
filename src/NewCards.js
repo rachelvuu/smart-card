@@ -324,7 +324,7 @@ class ClassicModeForm extends Component {
         {inputBack}
         <div>
           <button className="btn btn-p btn-sm submit-button" onClick={this.addCard}>Submit</button>
-          <Link to="/my-cards" className="btn btn-secondary btn-sm my-cards-link view-button">View Cards</Link>
+          <Link to={"/my-cards/" + (this.state.currentUser == null ? "Guest" : this.state.currentUser.displayName)} className="btn btn-sm btn-p submit-button">View Cards</Link>
         </div>
       </div>
     )
