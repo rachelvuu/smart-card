@@ -9,14 +9,11 @@ import {Header, Footer, ErrorModal} from './App.js';
 import { css } from 'react-emotion';
 import { ClipLoader } from 'react-spinners';
 
-<<<<<<< HEAD
 const override = css`
   display: block;
   margin: 0 auto;
   border-color: red;
 `;
-=======
->>>>>>> 68f30da3b4a76522d34b081c09718dbb12d31e41
 
 class FirebaseApp extends Component {
   constructor(props) {
