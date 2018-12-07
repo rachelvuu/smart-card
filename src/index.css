@@ -340,10 +340,20 @@ text-decoration: none;
 .view-button, .submit-button {
   margin-right: .5rem;
   margin-top: .75rem;
+  border-radius: 100px;
+}
+
+.view-button{
+  color: #a24bcf;
+}
+
+.view-button:hover{
+  color: white;
+  background-color: #a24bcf;
 }
 
 .submit-button:hover {
-  background-color: #85754d;
+  background-color: white;
 }
 
 .input-card-front {
