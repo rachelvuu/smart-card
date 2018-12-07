@@ -74,7 +74,8 @@ class AddCardForm extends Component {
           Get started with Smart Card by typing or pasting your notes below. Next, hit submit to create
           your cards. To view your cards click the 'View Cards' button. Smart Cards has two modes for 
           creating notecards. Toggle which mode you want below. <em>Smart mode</em> will chose which terms to
-          add into notecards for you. <em>Classic mode</em> will turn each individual entry into its own card.
+          add into notecards for you. You can either enter in a body of text, or upload a picture of your text. 
+          <em> Classic mode</em> will turn each individual entry into its own card.
         </label>
         <div className="btn-group" role="group" aria-label="Note card mode">
           <button type="button" className="btn btn-sm btn-secondary smart-mode" onClick={this.toggleSmartMode}>Smart Mode</button>
@@ -152,8 +153,8 @@ class SmartModeForm extends Component {
     let spinnerRender = null;
     if (this.state.loading) {
       spinnerRender = (
-      <div className="spinner">
-        <img src={spinner} alt="Processing..."/>
+      <div className="spinner-container">
+        <div className="spinner"></div>
       </div>);
     }
     return (
