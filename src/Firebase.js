@@ -97,6 +97,9 @@ class FirebaseApp extends Component {
         content = (
         <div className="sign-in-page">
           <h2 className="display-4">Welcome {this.state.user.displayName}!</h2>
+          <Link to="/new-cards">
+            <button className="btn btn-p get-started-button">Make new cards!</button>
+          </Link>
         </div>);
       } else if (this.state.toggle === false) {
         content = (
