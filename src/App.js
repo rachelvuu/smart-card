@@ -179,7 +179,7 @@ export class Header extends Component {
         <header className="menu d-flex justify-content-between align-items-center">
         <Link className="home-link" to="/home">
           <h1 className="title">Smart Card</h1>
-          <img className="icon" alt="Graphic of a notepad icon" src="https://img.icons8.com/metro/52/b7a57a/note.png"></img>
+          <img className="icon" alt="Graphic of a notepad icon" src="https://img.icons8.com/metro/52/a24bcf/note.png"></img>
         </Link>
         <nav>
           <ul className="nav justify-content-end">
