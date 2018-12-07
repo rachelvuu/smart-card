@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import 'whatwg-fetch';
 import firebase from 'firebase/app';
 import 'firebase/storage';
+import spinner from './img/processing.gif';
 
 
 class NewCardsPage extends Component {
@@ -113,7 +114,8 @@ class SmartModeForm extends Component {
     this.state = {
       text: "",
       img: "",
-      currentUser: null
+      currentUser: null,
+      loading: false
     }
     this.storeImageInFirebase = this.storeImageInFirebase.bind(this);
     this.updateText = this.updateText.bind(this);
@@ -129,32 +131,41 @@ class SmartModeForm extends Component {
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
+      this.setState({loading:false});
       if (user) { // is someone logged in
         this.setState({
             text: this.state.text,
             img: this.state.img,
-            currentUser: user
+            currentUser: user,
         })
       } else {
         this.setState({
             text: this.state.text,
             img: this.state.img,
-            currentUser: null
+            currentUser: null,
         })
       }
     })
 }
 
   render() {
+    let spinnerRender = null;
+    if (this.state.loading) {
+      spinnerRender = (
+      <div className="spinner">
+        <img src={spinner} alt="Processing..."/>
+      </div>);
+    }
     return (
       <div className="text-input">
+        {spinnerRender}
         <form onSubmit={this.uploadFile}>
           <div className="form-group">
             <label>Upload a picture of your notes:</label>
             <input type="file" className="form-control-file" accept="image/*" onChange={this.uploadFile}/>
           </div>
         </form>
-        <textarea className="form-control input-card-text" maxLength="5000" rows="4" onChange={this.updateText} value={this.state.text} placeholder="Your notes go here"></textarea>
+        <textarea className="form-control input-card-text" maxLength="5000" rows="4" onChange={this.updateText} readOnly={this.state.loading} value={this.state.text} placeholder="Your notes go here"></textarea>
         <div>
           <button type="submit" className="btn btn-p btn-sm submit-button" onClick={(this.state.img === "") ? () => {this.getData("")} : this.storeImageInFirebase}>Submit</button>
           <Link to={"/my-cards/" + (this.state.currentUser == null ? "Guest" : this.state.currentUser.displayName)} className="my-cards-link">
@@ -183,6 +194,7 @@ class SmartModeForm extends Component {
 
   storeImageInFirebase() {
     if (this.props.checkLoggedIn() != null) {
+      this.setState({loading:true}); //console.log("yeet")
       let storage = firebase.storage().ref();
       storage.child("/image").putString(this.state.img, 'data_url');
       storage.child("/image").getDownloadURL().then((promise) => {
@@ -190,7 +202,7 @@ class SmartModeForm extends Component {
       })
       .catch((error) => {
         console.log(error.message);
-      });
+      })//.then(() => this.setState({loading:false}));
     }
   }
 
@@ -236,6 +248,7 @@ class SmartModeForm extends Component {
 
   getData(text) {
     if (this.props.checkLoggedIn() != null) {
+      this.setState({loading:true});
       text = this.state.text.replace(/"/g, '\'') + " " + text;
 
       let content = {
@@ -271,7 +284,7 @@ class SmartModeForm extends Component {
         })
         .catch((error) => {
           console.log(error);
-        });
+        }).then(() => {this.setState({loading:false});});
     }
   }
 }

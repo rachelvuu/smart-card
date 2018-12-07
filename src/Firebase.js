@@ -6,14 +6,6 @@ import 'firebase/auth';
 import 'firebase/database';
 import {Link} from 'react-router-dom';
 import {Header, Footer, ErrorModal} from './App.js';
-import { css } from 'react-emotion';
-import { ClipLoader } from 'react-spinners';
-
-const override = css`
-  display: block;
-  margin: 0 auto;
-  border-color: red;
-`;
 
 class FirebaseApp extends Component {
   constructor(props) {
@@ -22,35 +14,23 @@ class FirebaseApp extends Component {
   }
 
   componentDidMount() {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        this.setState({
-          user: user,
-          loading: false,
-          errorMessage: null
-        });
-      } else {
-        this.setState( { user: null, loading:false } );
-      }
-    });
-
-    this.authUnregFunc = firebase.auth().onAuthStateChanged((user) => {
-      if(user){
-        //console.log('logged in');
-        this.setState({user: user})
-      }
-      else {
-        //console.log('logged out');
-      }});
+    this.unsub = firebase.auth().onAuthStateChanged((user) => {
+      this.setState({ loading: false });
+        if (user) {
+            this.setState({ user: user, errorMessage: null });
+        } else {
+            this.setState( { user: null } );
+        }
+    })
     }
     
     componentWillUnmount() {
-      this.authUnregFunc();
+      this.unsub();
     }
     
 
     handleSignUp(email, password, handle) {
-      this.setState({errorMessage:null});
+      this.setState({errorMessage:null,loading:true});
 
       firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(() => {
@@ -61,7 +41,7 @@ class FirebaseApp extends Component {
         })
         .catch((err) => {
           this.setState({errorMessage: err.message});
-      });
+      }).then(() => this.setState({loading:false}));
     }
 
     resolveError() {
@@ -71,21 +51,21 @@ class FirebaseApp extends Component {
     }
     
     handleSignIn(email, password) {
-      this.setState({errorMessage:null});
+      this.setState({errorMessage:null,loading:true});
 
       firebase.auth().signInWithEmailAndPassword(email, password)
         .catch((err) => {
           this.setState({errorMessage: err.message});
-        })
+        }).then(() => this.setState({loading:false}));
     }
 
     handleSignOut(){
-      this.setState({errorMessage:null}); 
+      this.setState({errorMessage:null,loading:true}); 
 
       firebase.auth().signOut()
         .catch((err) => {
           this.setState({errorMessage: err.message});
-        })
+        }).then(() => this.setState({loading:false}));
     }
     
     toggleState() {
@@ -100,6 +80,12 @@ class FirebaseApp extends Component {
       }
 
       let content=null;
+      if (this.state.loading) {
+        content = (
+        <div className="sign-in-page pageload">
+        Loading...
+        </div>);
+      } else {
       if (this.state.user != null) {
         content = (
         <div className="sign-in-page">
@@ -122,7 +108,7 @@ class FirebaseApp extends Component {
             <p className="form-text">Already have an account? <Link className="link" to="/signin" onClick={() => this.toggleState()}>Sign in.</Link></p>
           </div>
         );
-      }
+      }}
         return (
           <div>
               {modal}
@@ -285,15 +271,6 @@ class SignUpForm extends Component {
                   <button className="btn get-started-button btn-p" onClick={(e) => this.handleSignIn(e)}>Log in</button>
                 </Link>
               </div>
-              <div className='sweet-loading'>
-                <ClipLoader
-                  className={override}
-                  sizeUnit={"px"}
-                  size={150}
-                  color={'#123abc'}
-                  loading={this.state.loading}
-                />
-              </div> 
             </div>
           </form>
         </div>

@@ -4,15 +4,14 @@ import { Link } from 'react-router-dom';
 import { Modal, Button } from 'react-bootstrap';
 import firebase from 'firebase/app';
 
-
-
 class MyCardsPage extends Component {
     constructor() {
         super();
         this.state = {
             editMode: false,
             cardToEdit: null,
-            currentUser: null
+            currentUser: null,
+            loading: true
         }
         this.editCard = this.editCard.bind(this);
         this.enableEdit = this.enableEdit.bind(this);
@@ -23,6 +22,7 @@ class MyCardsPage extends Component {
 
     componentDidMount() {
         firebase.auth().onAuthStateChanged((user) => {
+            this.setState({loading:false});
           if (user) { // is someone logged in
             this.setState({
                 editMode: false,
@@ -101,10 +101,14 @@ class MyCardsPage extends Component {
             tools = <div></div>;
         }
 
-        return(
-            <div>
-                {editModal}
-                <Header/>
+        let main = null;
+        if (this.state.loading) {
+            main = (
+                <div className="my-cards pageload">
+                Loading...
+                </div>);
+        } else {
+            main = (
                 <div className="form-group my-cards">
                     <h2 className="display-4 my-card-title">{this.props.match.params.username}'s Cards</h2>
                     {tools}
@@ -114,6 +118,14 @@ class MyCardsPage extends Component {
                         })}
                     </div>
                 </div>
+            );
+        }
+
+        return(
+            <div>
+                {editModal}
+                <Header/>
+                {main}
                 <Footer/>
             </div>
         )

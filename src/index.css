@@ -337,6 +337,16 @@ text-decoration: none;
   width: 100%;
 }
 
+.pageload {
+  background-image: url("./img/pageload.gif");
+  background-size: 100%;
+  margin-left: 10%;
+  width: 80%;
+  height: 80%;
+  display: default;
+  position: absolute;
+}
+
 .view-button, .submit-button {
   margin-right: .5rem;
   margin-top: .75rem;
@@ -668,6 +678,21 @@ footer a {
   -moz-transform: rotateY(-180deg);
   -ms-transform: rotateY(-180deg);
   transform: rotateY(-180deg);
+}
+
+.spinner { /*need to reset all inherited styles*/
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  margin-left: 25%;
+  margin-top: 0%;
+  display: default;
+  flex-direction: none;
+  align-items: center;
+  color: none;
+  padding: 0rem;
+  border-radius: 0rem;
+  z-index: +1;
 }
 
 
