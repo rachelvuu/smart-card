@@ -82,8 +82,8 @@ class FirebaseApp extends Component {
       let content=null;
       if (this.state.loading) {
         content = (
-        <div className="sign-in-page pageload">
-        Loading...
+        <div className="sign-in-page spinner-container">
+          <div className="spinner"></div>
         </div>);
       } else {
       if (this.state.user != null) {

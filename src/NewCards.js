@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import 'whatwg-fetch';
 import firebase from 'firebase/app';
 import 'firebase/storage';
-import spinner from './img/processing.gif';
 
 
 class NewCardsPage extends Component {
@@ -208,8 +207,6 @@ class SmartModeForm extends Component {
   }
 
   getImageData(imgURL) {
-    //application/json
-    //application/octet-stream
     let content = {
       headers: {
         "Content-Type": "application/json",
@@ -285,7 +282,9 @@ class SmartModeForm extends Component {
         })
         .catch((error) => {
           console.log(error);
-        }).then(() => {this.setState({loading:false});});
+        }).then(() => {
+          this.setState({loading:false});
+        });
     }
   }
 }
@@ -299,7 +298,8 @@ class ClassicModeForm extends Component {
 
     this.state = {
       front: '',
-      back: ''
+      back: '',
+      createdCard: false
     };
   }
 
@@ -318,17 +318,29 @@ class ClassicModeForm extends Component {
   render() {
     let inputFront = (<textarea className="form-control input-card-front" maxLength="5000" rows="4" placeholder="Front of card" onChange={this.updateFront} value={this.state.front}></textarea>);
     let inputBack = (<textarea className="form-control input-card-back" maxLength="5000" rows="4" placeholder="Back of card" onChange={this.updateBack} value={this.state.back}></textarea>);
-    
+    let success = (this.state.createdCard ? "btn btn-sm btn-p success" : "btn btn-sm btn-p submit-button");
     return(
       <div className="text-input">
         {inputFront}
         {inputBack}
         <div>
           <button className="btn btn-p btn-sm submit-button" onClick={this.addCard}>Submit</button>
-          <Link to={"/my-cards/" + (this.state.currentUser == null ? "Guest" : this.state.currentUser.displayName)} className="btn btn-sm btn-p submit-button">View Cards</Link>
+          <Link to={"/my-cards/" + (this.state.currentUser == null ? "Guest" : this.state.currentUser.displayName)} className={success}>View Cards</Link>
         </div>
       </div>
     )
+  }
+
+  componentDidUpdate() {
+    if (this.state.createdCard) {
+      setTimeout(() => {
+        this.setState({
+          front: this.state.front,
+          back: this.state.back,
+          createdCard: false
+        });
+      }, 500);
+    }
   }
 
   addCard() {
@@ -340,7 +352,8 @@ class ClassicModeForm extends Component {
       this.props.addCard(newCard);
       this.setState({
         front: '',
-        back: ''
+        back: '',
+        createdCard: true,
       });
     }
   }

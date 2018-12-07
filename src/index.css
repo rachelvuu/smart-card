@@ -732,6 +732,13 @@ footer a {
   }
 }
 
+.success {
+  background-color: greenyellow;
+  margin-right: .5rem;
+  margin-top: .75rem;
+  border-radius: 100px;
+}
+
 
 @media (min-width: 768px) {
   .icon {
@@ -796,5 +803,5 @@ footer a {
 
   .small-home {
     display:none;
-}
+  }
 }
