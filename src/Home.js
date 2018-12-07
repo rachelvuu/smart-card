@@ -105,9 +105,13 @@ class RandomCard extends Component {
       {front: "Which actress has won the most Oscars?", back: "Katherine Hepburn"},
       {front: "What colour is a Welsh poppy?", back: "Yellow"},
       {front: "When was William Shakespeare born? ", back: "April 23rd 1564"},
+      {front: "When's Zubin's birthday?", back: "March 17th 1997"},
+      {front: "Why is Jacob Morris's netID @truama?", back: "Take INFO 340 to find out!"},
+      {front: "How fast do Humming Birds flap their wings?", back: "Between 50 and 70 times a second"},
+      {front: "How much does the average corgi weigh?", back: "Between 23 and 28lbs"},
       {front: "", back: ""}
     ];
-    let number = Math.floor(Math.random() * (facts.length -1) * 1.5);
+    let number = Math.floor(Math.random() * (facts.length -1) * 3);
     let card = {
       front: facts[Math.min(number, facts.length - 1)].front,
       back:  facts[Math.min(number, facts.length - 1)].back,
