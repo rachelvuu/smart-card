@@ -7,7 +7,7 @@ class HomePage extends Component {
     let exampleCards = [
       {
         img: (<img className="icon-front" alt="Person Icon" 
-        src="https://img.icons8.com/ios-glyphs/50/000000/help.png"></img>),
+        src="https://img.icons8.com/ios-glyphs/50/a24bcf/help.png"></img>),
         front : (<h1 className="example-font">What is Smart Card?</h1>),
         back: (<p className="example-text back-text-1">Smart Card is a website that can be used to help you study. 
           Just enter in your typed up notes and Smart Card will create 
@@ -15,21 +15,16 @@ class HomePage extends Component {
       },
       {
         img: (<img className="icon-front" alt="Person Icon" 
-          src="https://png.icons8.com/material-rounded/48/000000/user.png"></img>),
+          src="https://png.icons8.com/material-rounded/48/a24bcf/user.png"></img>),
         front: (<h1 className="example-font">Who made Smart Card?</h1>),
         back: (<p className="example-text back-text-2">Smart Card was developed by Amelia Shull, Rachel Vuu, Yu Che Lin, and
           Christopher Vitalis in the Informatics major at the University of Washington.</p>)
       },
       {
         img: (<img className="icon-front" alt="Person Icon" 
-          src="https://png.icons8.com/ios/50/000000/money-box-filled.png"></img>),
+          src="https://png.icons8.com/ios/50/a24bcf/money-box-filled.png"></img>),
         front: (<h1 className="example-font">Is Smart Card free?</h1>),
         back: (<p className="example-text back-text-3">Yes! Smart Card is 100% free!</p>)
-      },
-      {
-        img: "",
-        front: "",
-        back: ""
       }
     ];
 
@@ -62,20 +57,20 @@ class HomePage extends Component {
           </div>
           <div className="top-row">
             <ExampleCard card={exampleCards[0]}></ExampleCard>
-            <ExampleCard card={exampleCards[3]}></ExampleCard>
-            <ExampleCard card={exampleCards[3]}></ExampleCard>
+            <RandomCard></RandomCard>
+            <RandomCard></RandomCard>
           </div>
 
           <div className="middle-row">
-            <ExampleCard card={exampleCards[3]}></ExampleCard>
+            <RandomCard></RandomCard>
             {jumbotron}
             <ExampleCard card={exampleCards[2]}></ExampleCard>
           </div>
 
           <div className="bottom-row">
-            <ExampleCard card={exampleCards[3]}></ExampleCard>
+            <RandomCard></RandomCard>
             <ExampleCard card={exampleCards[1]}></ExampleCard>
-            <ExampleCard card={exampleCards[3]}></ExampleCard>
+            <RandomCard></RandomCard>
           </div>
         </main>
         <Footer/>
@@ -100,6 +95,36 @@ class ExampleCard extends Component {
       </div>
     );
   }
+}
+
+class RandomCard extends Component {
+  render() {
+    let facts = [
+      {front:"What is the largest known prime number?", back: "2^(77,232,917) − 1"},
+      {front: "Where is the Sea of Tranquility?", back: "The Moon"},
+      {front: "Which actress has won the most Oscars?", back: "Katherine Hepburn"},
+      {front: "What colour is a Welsh poppy?", back: "Yellow"},
+      {front: "When was William Shakespeare born? ", back: "April 23rd 1564"},
+      {front: "", back: ""}
+    ];
+    let number = Math.floor(Math.random() * (facts.length -1) * 1.5);
+    let card = {
+      front: facts[Math.min(number, facts.length - 1)].front,
+      back:  facts[Math.min(number, facts.length - 1)].back,
+    }
+    return (
+      <div className="flip-card example-card random-card">
+        <div className="flip-card-inner">
+          <div className="flip-card-front random-text">
+            {card.front}
+          </div>
+          <div className="flip-card-back random-text">
+            {card.back}
+           </div>
+        </div>
+      </div>
+      );
+    }
 }
 
 export default HomePage;

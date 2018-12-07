@@ -50,10 +50,6 @@ code {
   display: none;
 }
 
-.icon-front {
-  opacity: .5;
-}
-
 .small-home {
   display: flex;
   flex-direction: column;
@@ -386,6 +382,15 @@ footer {
   color: #a24bcf;
 }
 
+.random-text{
+  line-height: 20px;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  padding-top: 27%;
+  padding-bottom: auto;
+  color: #a24bcf;
+}
+
 .example-font{
   font-weight: 200;
 }
@@ -394,6 +399,10 @@ footer {
   margin: 2rem;
   width: 300px;
   height: 200px;
+}
+
+.random-card {
+  text-align: center;
 }
 
 .back-text-1, .back-text-2{
