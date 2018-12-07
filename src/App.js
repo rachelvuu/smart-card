@@ -222,31 +222,6 @@ export class Header extends Component {
   }
 }
 
-{/* <header className="menu d-flex justify-content-between align-items-center">
-<Link className="home-link" to="/home">
-  <h1 className="title">Smart Card</h1>
-  <img className="icon" alt="Graphic of a notepad icon" src="https://img.icons8.com/metro/52/a24bcf/note.png"></img>
-</Link>
-<nav>
-  <ul className="nav justify-content-end">
-    <li className="nav-item">
-      <Link className="nav-link new-cards-link-nav" to="/new-cards">New Cards</Link>
-    </li>
-    <li className="nav-item">
-      <Link className="nav-link active my-cards-link" to="/my-cards">My Cards</Link>
-    </li>
-    <li className="nav-item">
-      <Link className="nav-link about-link" to="/about">About</Link>
-    </li>
-    <li className="nav-item">
-      <UserNav></UserNav>
-    </li>
-    <li>
-    </li>
-  </ul>
-</nav>
-</header>  */}
-
 class UserNav extends Component {
   constructor() {
     super();
