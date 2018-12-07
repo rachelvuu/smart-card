@@ -14,6 +14,14 @@ class FirebaseApp extends Component {
   }
 
   componentDidMount() {
+    firebase.auth().onAuthStateChanged((user) => {
+      this.setState({ loading: false });
+        if (user) {
+            this.setState({ user: user, errorMessage: null });
+        } else {
+            this.setState( { user: null } );
+        }
+    })
     this.unsub = firebase.auth().onAuthStateChanged((user) => {
       this.setState({ loading: false });
         if (user) {
@@ -22,11 +30,11 @@ class FirebaseApp extends Component {
             this.setState( { user: null } );
         }
     })
-    }
+  }
     
-    componentWillUnmount() {
-      this.unsub();
-    }
+  componentWillUnmount() {
+    this.unsub();
+  }
     
 
     handleSignUp(email, password, handle) {

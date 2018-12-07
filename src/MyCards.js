@@ -104,8 +104,8 @@ class MyCardsPage extends Component {
         let main = null;
         if (this.state.loading) {
             main = (
-                <div className="spinner-container">
-                    <div cassName="spinner"></div>
+                <div className="my-cards-spinner spinner-container">
+                    <div className="spinner"></div>
                 </div>);
         } else {
             main = (

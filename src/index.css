@@ -296,7 +296,7 @@ text-decoration: none;
   width: 2rem;
 }
 
-.new-cards, .my-cards, .sign-in-page, .about-content, .welcome-message {
+.new-cards, .my-cards-spinner, .my-cards, .sign-in-page, .about-content, .welcome-message {
   width: 90%;
   margin-left: auto;
   margin-right: auto;
@@ -310,6 +310,10 @@ text-decoration: none;
 }
 
 .sign-in-page {
+  min-height: 30rem;
+}
+
+.my-cards-spinner {
   min-height: 30rem;
 }
 
@@ -337,7 +341,7 @@ text-decoration: none;
   width: 100%;
 }
 
-.pageload {
+/*.pageload {
   background-image: url("./img/pageload.gif");
   background-size: 100%;
   margin-left: 10%;
@@ -345,7 +349,7 @@ text-decoration: none;
   height: 80%;
   display: default;
   position: absolute;
-}
+}*/
 
 .view-button, .submit-button {
   margin-right: .5rem;

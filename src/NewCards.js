@@ -163,7 +163,7 @@ class SmartModeForm extends Component {
         })
       }
     })
-}
+  }
 
   render() {
     let spinnerRender = null;
@@ -313,8 +313,25 @@ class ClassicModeForm extends Component {
     this.state = {
       front: '',
       back: '',
-      createdCard: false
+      createdCard: false,
+      currentUser: null
     };
+  }
+
+  
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged((user) => {
+      this.setState({loading:false});
+      if (user) { // is someone logged in
+        this.setState({
+            currentUser: user
+        })
+      } else {
+        this.setState({
+            currentUser: null
+        })
+      }
+    })
   }
 
   updateFront(event) {
@@ -330,8 +347,8 @@ class ClassicModeForm extends Component {
   }
 
   render() {
-    let inputFront = (<textarea className="form-control input-card-front" maxLength="5000" rows="4" placeholder="Front of card" onChange={this.updateFront} value={this.state.front}></textarea>);
-    let inputBack = (<textarea className="form-control input-card-back" maxLength="5000" rows="4" placeholder="Back of card" onChange={this.updateBack} value={this.state.back}></textarea>);
+    let inputFront = (<textarea className="form-control input-card-front" maxLength="250" rows="4" placeholder="Front of card" onChange={this.updateFront} value={this.state.front}></textarea>);
+    let inputBack = (<textarea className="form-control input-card-back" maxLength="250" rows="4" placeholder="Back of card" onChange={this.updateBack} value={this.state.back}></textarea>);
     let success = (this.state.createdCard ? "btn btn-sm btn-p success" : "btn btn-sm btn-p submit-button");
     return(
       <div className="text-input">
