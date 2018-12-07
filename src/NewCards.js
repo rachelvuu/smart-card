@@ -112,7 +112,8 @@ class SmartModeForm extends Component {
     super();
     this.state = {
       text: "",
-      img: ""
+      img: "",
+      currentUser: null
     }
     this.storeImageInFirebase = this.storeImageInFirebase.bind(this);
     this.updateText = this.updateText.bind(this);
@@ -126,6 +127,24 @@ class SmartModeForm extends Component {
     this.setState(state);
   }
 
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) { // is someone logged in
+        this.setState({
+            text: this.state.text,
+            img: this.state.img,
+            currentUser: user
+        })
+      } else {
+        this.setState({
+            text: this.state.text,
+            img: this.state.img,
+            currentUser: null
+        })
+      }
+    })
+}
+
   render() {
     return (
       <div className="text-input">
@@ -138,7 +157,7 @@ class SmartModeForm extends Component {
         <textarea className="form-control input-card-text" maxLength="5000" rows="4" onChange={this.updateText} value={this.state.text} placeholder="Your notes go here"></textarea>
         <div>
           <button type="submit" className="btn btn-p btn-sm submit-button" onClick={(this.state.img === "") ? () => {this.getData("")} : this.storeImageInFirebase}>Submit</button>
-          <Link to="/my-cards/" className="btn btn-secondary btn-sm my-cards-link view-button">View Cards</Link>
+          <Link to={"/my-cards/" + (this.state.currentUser == null ? "Guest" : this.state.currentUser.displayName)} className="btn btn-secondary btn-sm my-cards-link view-button">View Cards</Link>
         </div>
       </div>
     )
