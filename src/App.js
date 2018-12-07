@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Link, Switch} from 'react-router-dom'
+import { Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, Collapse } from 'reactstrap';
 import HomePage from './Home';
 import AboutPage from './About';
 import NewCardsPage from './NewCards';
@@ -175,35 +176,48 @@ export class Footer extends Component {
 //"/new-cards" + (this.props.currentUser == null ? "" : currentUser.displayName)
 
 export class Header extends Component {
+  constructor(props) {
+    super(props);
+
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      isOpen: false
+    };
+  }
+  toggle() {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  }
   render() {
     return (
-        <header className="menu d-flex justify-content-between align-items-center">
-        <Link className="home-link" to="/home">
-          <h1 className="title">Smart Card</h1>
-          <img className="icon" alt="Graphic of a notepad icon" src="https://img.icons8.com/metro/52/a24bcf/note.png"></img>
-        </Link>
-        <nav class="navbar navbar-expand-lg">
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav mr-auto justify-content-end">
-              <li className="nav-item active">
-                <Link className="nav-link new-cards-link-nav" to="/new-cards">New Cards</Link>
-              </li>
-              <li className="nav-item active">
-                <Link className="nav-link active my-cards-link" to={"/new-cards"}>My Cards</Link>
-              </li>
-              <li className="nav-item active">
-                <Link className="nav-link about-link" to="/about">About</Link>
-              </li>
-              <li className="nav-item active">
-                <UserNav></UserNav>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </header>
+      <div>
+        <Navbar color="light" light expand="md">
+          <NavbarBrand href="/">
+          <Link className="home-link" to="/home">
+            <h1 className="title">Smart Card</h1>
+            <img className="icon" alt="Graphic of a notepad icon" src="https://img.icons8.com/metro/52/a24bcf/note.png"></img>
+          </Link>
+          </NavbarBrand>
+          <NavbarToggler onClick={this.toggle} />
+          <Collapse isOpen={this.state.isOpen} navbar>
+            <Nav className="ml-auto" navbar>
+              <NavItem className="nav-item">
+                <Link className="nav-link" to="/new-cards">New Cards</Link>
+              </NavItem>
+              <NavItem className="nav-item">
+                <Link className="nav-link" to="/my-cards">My Cards</Link>
+              </NavItem>
+              <NavItem className="nav-item">
+                <Link className="nav-link" to="/about">About</Link>
+              </NavItem>
+              <NavItem>
+                <UserNav />
+              </NavItem>
+            </Nav>
+          </Collapse>
+        </Navbar>
+      </div>
     );
   }
 }
