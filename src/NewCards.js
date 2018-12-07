@@ -68,7 +68,7 @@ class AddCardForm extends Component {
   render() {
     return(
       <div className="form-group new-cards">
-        <h2 className="display-4">New Cards</h2>
+        <h2 className="display-4 header-font-size">New Cards</h2>
         <label>
           Get started with Smart Card by typing or pasting your notes below. Next, hit submit to create
           your cards. To view your cards click the 'View Cards' button. Smart Cards has two modes for 
@@ -77,8 +77,8 @@ class AddCardForm extends Component {
           <em> Classic mode</em> will turn each individual entry into its own card.
         </label>
         <div className="btn-group" role="group" aria-label="Note card mode">
-          <button type="button" className="btn btn-sm btn-secondary smart-mode" onClick={this.toggleSmartMode}>Smart Mode</button>
-          <button type="button" className="btn btn-sm btn-secondary classic-mode" onClick={this.toggleClassicMode}>Classic Mode</button>
+          <button type="button" className="btn btn-sm  smart-mode get-started-button" onClick={this.toggleSmartMode}>Smart Mode</button>
+          <button type="button" className="btn btn-sm  classic-mode get-started-button" onClick={this.toggleClassicMode}>Classic Mode</button>
         </div>
         <Form checkLoggedIn={this.props.checkLoggedIn} smartMode={this.state.smartMode} addCard={this.props.addCard}></Form>
       </div>

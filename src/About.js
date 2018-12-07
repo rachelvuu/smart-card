@@ -9,7 +9,7 @@ class AboutPage extends Component {
       <div  className="about-background">
         <Header/>
         <div className="about-content">
-          <h2 className="display-4">About</h2>
+          <h2 className="display-4 header-font-size">About</h2>
           <div className="all-bios">
             <div className="group-two">
               <Profile person="amelia" bio={ameliaBio}/>

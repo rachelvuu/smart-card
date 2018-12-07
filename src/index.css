@@ -739,12 +739,22 @@ footer a {
   border-radius: 100px;
 }
 
+.smart-mode:focus, .classic-mode:focus{
+  background: #561d72
+}
+
+.header-font-size{
+  font-size: 40px;
+}
 
 @media (min-width: 768px) {
   .icon {
     display: none;
 }
 
+.header-font-size{
+  font-size: 50px;
+}
   .all-bios {
     display: flex;
     flex-direction: column;
