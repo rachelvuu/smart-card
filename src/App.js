@@ -192,7 +192,7 @@ export class Header extends Component {
                 <Link className="nav-link new-cards-link-nav" to="/new-cards">New Cards</Link>
               </li>
               <li className="nav-item active">
-                <Link className="nav-link active my-cards-link" to={"/new-cards" + (this.props.currentUser == null ? "" : currentUser.displayName)}>My Cards</Link>
+                <Link className="nav-link active my-cards-link" to={"/new-cards"}>My Cards</Link>
               </li>
               <li className="nav-item active">
                 <Link className="nav-link about-link" to="/about">About</Link>

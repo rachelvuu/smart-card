@@ -82,14 +82,16 @@ class HomePage extends Component {
 class ExampleCard extends Component {
   render() {
     return(
-      <div className="flip-card example-card">
-        <div className="flip-card-inner">
-          <div className="flip-card-front example-text">
+      <div className="flip-card example-card card">
+        <div className="flip-card-inner flip-container">
+        <div className="flipper">
+          <div className="flip-card-front example-text front">
             {this.props.card.img}
             {this.props.card.front}
           </div>
-          <div className="flip-card-back">
+          <div className="flip-card-back back">
             {this.props.card.back}
+           </div>
            </div>
         </div>
       </div>
@@ -119,11 +121,13 @@ class RandomCard extends Component {
     return (
       <div className="flip-card example-card random-card">
         <div className="flip-card-inner">
+        <div className="flipper">
           <div className="flip-card-front random-text">
             <p>{card.front}</p>
           </div>
           <div className="flip-card-back random-text">
             <p>{card.back}</p>
+           </div>
            </div>
         </div>
       </div>
