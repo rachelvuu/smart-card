@@ -106,7 +106,7 @@ class MyCardsPage extends Component {
                 {editModal}
                 <Header/>
                 <div className="form-group my-cards">
-                    <h2 className="display-4 my-card-title">My Cards</h2>
+                    <h2 className="display-4 my-card-title">{this.props.match.params.username}'s Cards</h2>
                     {tools}
                     <div className="card-container">
                         {cards.map((card, i) => {
