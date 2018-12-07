@@ -472,7 +472,7 @@ footer a {
   max-width: 300px;
   
   /* Image will fill half the screen if window <600px wide */
-  width: 50%;
+
   
   /* Set image to 100% of container to scale down at lower screen widths */
  
@@ -804,4 +804,14 @@ footer a {
   .small-home {
     display:none;
   }
+
 }
+
+@media (min-width: 1500px) {
+  .home-page {
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+}
+
+
