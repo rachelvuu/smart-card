@@ -148,7 +148,7 @@ export class App extends Component {
 
           
           {/* if currentUrl == '/my-caards', render <MyCardsPage> */}
-          <Route path='/my-cards/:username' render={(routerProps) => (
+          <Route path='/my-cards:username' render={(routerProps) => (
             <MyCardsPage {...routerProps} currentUser={this.state.currentUser} cards={this.state.cards} clearCards={this.clearCards} updateCard={this.updateCard} deleteCard={this.deleteCard}/>
           )}/>
 
@@ -162,10 +162,6 @@ export class App extends Component {
     );
   }
 }
-
-
-
-
 
 export class Footer extends Component {
   render() {
@@ -185,33 +181,14 @@ export class Header extends Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      isOpen: false,
-      currentUser: null
+      isOpen: false
     };
   }
-
   toggle() {
     this.setState({
-      isOpen: !this.state.isOpen,
-      currentUser: this.state.currentUser
+      isOpen: !this.state.isOpen
     });
   }
-
-  componentDidMount() {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) { // is someone logged in
-        this.setState({
-            currentUser: user
-        })
-      } else {
-        this.setState({
-          isOpen: this.state.isOpen,
-          currentUser: null
-        })
-      }
-    })
-  }
-
   render() {
     return (
       <div>
@@ -226,13 +203,19 @@ export class Header extends Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem className="nav-item">
-                <Link className="nav-link" to="/new-cards">New Cards</Link>
+                <Link className="nav-link" to="/new-cards">
+                  <p>New Cards</p>
+                </Link>
               </NavItem>
               <NavItem className="nav-item">
-                <Link className="nav-link" to={"/my-cards/" + (this.state.currentUser == null ? "guest" : this.state.currentUser.displayName)}>My Cards</Link>
+                <Link className="nav-link" to="/my-cards">
+                  <p>My Cards</p>
+                </Link>
               </NavItem>
               <NavItem className="nav-item">
-                <Link className="nav-link" to="/about">About</Link>
+                <Link className="nav-link" to="/about">
+                  <p>About</p>
+                </Link>
               </NavItem>
               <NavItem>
                 <UserNav />
@@ -267,9 +250,9 @@ class UserNav extends Component {
 
   render() {
     if(this.state.user != null) {
-      return(<Link className="nav-link log-out" to="/signin" onClick={this.signOut}>Log Out</Link>);
+      return(<Link className="nav-link log-out" to="/signin" onClick={this.signOut}><p>Log Out</p></Link>);
     } else {
-      return(<Link className="nav-link sign-in" to="/signin">Sign In</Link>);
+      return(<Link className="nav-link sign-in" to="/signin"><p>Sign In</p></Link>);
     }
   }
 

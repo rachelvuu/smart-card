@@ -203,20 +203,16 @@ code {
   padding: .5rem;
 }
 
-.menu h1, .nav-link  {
-  color: #4b79cf;
-}
-
 .menu :hover{
 text-decoration: none;
   color: #a24bcf;
 }
 
-nav li :hover{
+.nav-link p:hover{
   color: #a24bcf;
 }
 
-.sign-in, .log-out {
+.sign-in p, .log-out p {
   color: #a24bcf;
 }
 
@@ -238,7 +234,7 @@ nav li :hover{
 
 .get-started-button:hover, .btn-p:hover {
   background-color:  white;
-  color: #a24bcf
+  color: #a24bcf;
 }
 
 
@@ -264,12 +260,26 @@ nav li :hover{
 
 .title {
   display: none;
+  color: #4b79cf;
 }
 
-.nav-items{
+.title:hover{
+  color: #a24bcf;
+}
+
+.home-link:hover{
+  text-decoration: none;
+}
+
+.nav-link p{
   font-weight: bold;
+  color: #4b79cf;
+  display: inline;
 }
 
+.sign-in p, .log-out p {
+  color: #a24bcf;
+}
 
 .more-info {
   margin: 2rem;
