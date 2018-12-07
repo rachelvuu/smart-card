@@ -104,7 +104,7 @@ class MyCardsPage extends Component {
         return(
             <div>
                 {editModal}
-                <Header/>
+                <Header currentUser={this.state.currentUser}/>
                 <div className="form-group my-cards">
                     <h2 className="display-4 my-card-title">My Cards</h2>
                     {tools}

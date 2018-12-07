@@ -131,9 +131,9 @@ export class App extends Component {
   render() {
 
     return(
-     
+    
       <BrowserRouter>
-      
+
         <Switch>
           {/* if currentUrl == '/home', render <HomePage> */}
           <Route path="/home" component={HomePage}/>
@@ -147,7 +147,7 @@ export class App extends Component {
 
           
           {/* if currentUrl == '/my-caards', render <MyCardsPage> */}
-          <Route path='/my-cards' render={(routerProps) => (
+          <Route path='/my-cards:username' render={(routerProps) => (
             <MyCardsPage {...routerProps} currentUser={this.state.currentUser} cards={this.state.cards} clearCards={this.clearCards} updateCard={this.updateCard} deleteCard={this.deleteCard}/>
           )}/>
 
@@ -172,6 +172,7 @@ export class Footer extends Component {
     )
   }
 }
+//"/new-cards" + (this.props.currentUser == null ? "" : currentUser.displayName)
 
 export class Header extends Component {
   render() {
