@@ -148,7 +148,7 @@ export class App extends Component {
 
           
           {/* if currentUrl == '/my-caards', render <MyCardsPage> */}
-          <Route path='/my-cards:username' render={(routerProps) => (
+          <Route path='/my-cards/:username' render={(routerProps) => (
             <MyCardsPage {...routerProps} currentUser={this.state.currentUser} cards={this.state.cards} clearCards={this.clearCards} updateCard={this.updateCard} deleteCard={this.deleteCard}/>
           )}/>
 
@@ -181,14 +181,34 @@ export class Header extends Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      isOpen: false
+      isOpen: false,
+      currentUser: null
     };
   }
+
   toggle() {
     this.setState({
-      isOpen: !this.state.isOpen
+      isOpen: !this.state.isOpen,
+      currentUser: this.state.currentUser
     });
   }
+
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) { // is someone logged in
+        this.setState({
+            isOpen: this.state.isOpen,
+            currentUser: user
+        })
+      } else {
+        this.setState({
+            isOpen: this.state.isOpen,
+            currentUser: null
+        })
+      }
+    })
+}
+
   render() {
     return (
       <div>
@@ -208,7 +228,7 @@ export class Header extends Component {
                 </Link>
               </NavItem>
               <NavItem className="nav-item">
-                <Link className="nav-link" to="/my-cards">
+                <Link className="nav-link" to={"/my-cards/" + (this.state.currentUser == null ? "Guest" : this.state.currentUser.displayName)}>
                   <p>My Cards</p>
                 </Link>
               </NavItem>
