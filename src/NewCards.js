@@ -138,7 +138,7 @@ class SmartModeForm extends Component {
         <textarea className="form-control input-card-text" maxLength="5000" rows="4" onChange={this.updateText} value={this.state.text} placeholder="Your notes go here"></textarea>
         <div>
           <button type="submit" className="btn btn-p btn-sm submit-button" onClick={(this.state.img === "") ? () => {this.getData("")} : this.storeImageInFirebase}>Submit</button>
-          <Link to="/my-cards" className="btn btn-secondary btn-sm my-cards-link view-button">View Cards</Link>
+          <Link to="/my-cards/" className="btn btn-secondary btn-sm my-cards-link view-button">View Cards</Link>
         </div>
       </div>
     )
