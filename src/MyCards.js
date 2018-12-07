@@ -250,10 +250,10 @@ class Card extends Component {
         return (
             <div className="flip-card" onClick={() => this.props.editCard(thisCard)}>
                 <div className="flip-card-inner">
-                    <div className="flip-card-front">
+                    <div className="flip-card-front my-card-text">
                         <p>{this.props.card.front}</p>
                     </div>
-                    <div className="flip-card-back">
+                    <div className="flip-card-back my-card-text">
                         <p>{this.props.card.back}</p>
                     </div>
                 </div>

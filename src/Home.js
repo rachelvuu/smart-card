@@ -120,10 +120,10 @@ class RandomCard extends Component {
       <div className="flip-card example-card random-card">
         <div className="flip-card-inner">
           <div className="flip-card-front random-text">
-            {card.front}
+            <p>{card.front}</p>
           </div>
           <div className="flip-card-back random-text">
-            {card.back}
+            <p>{card.back}</p>
            </div>
         </div>
       </div>

@@ -382,12 +382,21 @@ footer {
   color: #a24bcf;
 }
 
-.random-text{
-  line-height: 20px;
+
+.my-card-text, .random-text{
   padding-left: 2.5rem;
   padding-right: 2.5rem;
-  padding-top: 27%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding-bottom: auto;
+  color: black;
+}
+.my-card-text p, .random-text p {
+  line-height: 20px;
+}
+
+.random-text{
   color: #a24bcf;
 }
 
