@@ -167,7 +167,7 @@ export class Footer extends Component {
   render() {
     return (
       <footer>If you have any questions please contact
-        <a className="link" href="mailto:info.340.smart.card@gmail.com"> Smart Card's creators</a>.
+        <a href="mailto:info.340.smart.card@gmail.com"> Smart Card's creators</a>.
         Key phrases in notecards are from Microsoft's Text Analytics and Computer Vision API's.
       </footer>
     )
@@ -211,7 +211,7 @@ export class Header extends Component {
 
   render() {
     return (
-      <div>
+      <div className="header">
         <Navbar color="light" light expand="md">
           <NavbarBrand href="/">
           <Link className="home-link" to="/home">

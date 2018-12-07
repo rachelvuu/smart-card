@@ -368,12 +368,17 @@ text-decoration: none;
   width: 100%;
 }
 
-
 footer {
-  margin: .5rem;
+  padding: .5rem;
   font-size: .75rem;
   bottom: 0;
-  margin-bottom: 1rem;
+  background: white;
+  width: 100%;
+  position: fixed;
+}
+
+footer a {
+  color: #a24bcf;
 }
 
 
