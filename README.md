@@ -1,10 +1,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-* We implemented cards from Both of our projects (we had very similar projects)
-* Our design and colors were pretty different so we decided on creating a new one together (UW Colors)
-* We used Chris's hover to flip the card function 
-* The navigation was kept from Amelias design
-* The ability to edit cards is a new feature we implemented for this project (Incredibly painful to figure out)
+# Smart Card
+Smart Card was created by Christopher Vitalis, Amelia Shull, Rachel Vuu, and Yu Che Lin 
+Smart Card is meant to help students study by creating keywords as inputted by the user. There are two modes of input, Smart mode and Classic mode. Smart mode automatically creates cards based off of keywords which are made via Microsoft's Text Analytics and Computer Vision API's. Classic mode, allows you to input both the front at back of the card. You can upload text or use an image of your notes. You can create an account to save your cards to come back to or just be a guest and use your cards once.  
 
 Bootstrapped with Create React App 
 
