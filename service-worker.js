@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/smart-card/precache-manifest.b9eb9d84ea9387df6908e65304469255.js"
+  "/smart-card/precache-manifest.3e8c2f1d5e8c46c767beee0ec0796a28.js"
 );
 
 workbox.clientsClaim();
