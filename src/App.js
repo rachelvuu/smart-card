@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Link, Switch} from 'react-router-dom'
+import { BrowserRouter, Route, Link, Switch} from 'react-router-dom';
 import { Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, Collapse } from 'reactstrap';
 import HomePage from './Home';
 import AboutPage from './About';
@@ -213,12 +213,10 @@ export class Header extends Component {
     return (
       <div className="header">
         <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">
-          <Link className="home-link" to="/home">
-            <h1 className="title">Smart Card</h1>
-            <img className="icon" alt="Graphic of a notepad icon" src="https://img.icons8.com/metro/52/a24bcf/note.png"></img>
-          </Link>
-          </NavbarBrand>
+            <NavbarBrand className="home-link" href="/home">
+                <h1 className="title">Smart Card</h1>
+                <img className="icon" alt="Graphic of a notepad icon" src="https://img.icons8.com/metro/52/a24bcf/note.png"/>
+            </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
