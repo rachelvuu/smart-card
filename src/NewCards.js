@@ -74,7 +74,8 @@ class AddCardForm extends Component {
           your cards. To view your cards click the 'View Cards' button. Smart Cards has two modes for 
           creating notecards. Toggle which mode you want below. <em>Smart mode</em> will chose which terms to
           add into notecards for you. You can either enter in a body of text, or upload a picture of your text. 
-          <em> Classic mode</em> will turn each individual entry into its own card.
+          <em> Classic mode</em> will turn each individual entry into its own card. Even if you log out, your cards
+          will still be here!
         </label>
         <div className="btn-group" role="group" aria-label="Note card mode">
           <button type="button" className="btn btn-sm  smart-mode get-started-button" onClick={this.toggleSmartMode}>Smart Mode</button>
