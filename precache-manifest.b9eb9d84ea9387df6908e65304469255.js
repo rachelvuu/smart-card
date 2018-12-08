@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/smart-card/static/media/i-school.4960fd98.png"
   },
   {
-    "revision": "d9be3c0386e6e22bc08c",
+    "revision": "3feda4fd50954824c919",
     "url": "/smart-card/static/css/main.0feecd75.chunk.css"
   },
   {
@@ -24,8 +24,12 @@ self.__precacheManifest = [
     "url": "/smart-card/static/media/chris-vitalis.291e7191.jpg"
   },
   {
-    "revision": "d9be3c0386e6e22bc08c",
-    "url": "/smart-card/static/js/main.d9be3c03.chunk.js"
+    "revision": "3feda4fd50954824c919",
+    "url": "/smart-card/static/js/main.3feda4fd.chunk.js"
+  },
+  {
+    "revision": "17092d0dfeff972b9fc50622380d77dc",
+    "url": "/smart-card/static/media/Yu-che.17092d0d.jpg"
   },
   {
     "revision": "c5b25514d21b719ca0164b9dde2578a0",
@@ -36,15 +40,11 @@ self.__precacheManifest = [
     "url": "/smart-card/static/media/amelia-shull.4c57f427.jpg"
   },
   {
-    "revision": "17092d0dfeff972b9fc50622380d77dc",
-    "url": "/smart-card/static/media/Yu-che.17092d0d.jpg"
-  },
-  {
     "revision": "a9aa885624eb82b015ff",
     "url": "/smart-card/static/css/1.48822ff1.chunk.css"
   },
   {
-    "revision": "467cff3b9058c1fe714f2644c4c1064b",
+    "revision": "a3dace17391f8c93e5e1b5769b0be6c0",
     "url": "/smart-card/index.html"
   }
 ];
