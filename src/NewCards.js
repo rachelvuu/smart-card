@@ -72,7 +72,7 @@ class AddCardForm extends Component {
         <label>
           Get started with Smart Card by typing or pasting your notes below. Next, hit submit to create
           your cards. To view your cards click the 'View Cards' button. Smart Cards has two modes for 
-          creating notecards. Toggle which mode you want below. <em>Smart mode</em> will chose which terms to
+          creating notecards. Toggle which mode you want below. <em>Smart mode</em> will choose which terms to
           add into notecards for you. You can either enter in a body of text, or upload a picture of your text. 
           <em> Classic mode</em> will turn each individual entry into its own card. Even if you log out, your cards
           will still be here!

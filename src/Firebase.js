@@ -199,7 +199,7 @@ class SignUpForm extends Component {
 
               {/* handle */}
               <div className="form-group">
-                <input className="form-control" placeholder="Handle"
+                <input className="form-control" placeholder="Username"
                   id="handle" 
                   name="handle"
                   onChange={(e) => this.handleChange(e)}
