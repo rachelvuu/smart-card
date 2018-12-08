@@ -137,7 +137,7 @@ export class App extends Component {
 
         <Switch>
           {/* if currentUrl == '/home', render <HomePage> */}
-          <Route path="/home" component={HomePage}/>
+          <Route path='/home' component={HomePage}/>
           {/* if currentUrl == '/about', render <AboutPage> */}
           <Route path='/about' component={AboutPage} />
 
@@ -213,9 +213,11 @@ export class Header extends Component {
     return (
       <div className="header">
         <Navbar color="light" light expand="md">
-            <NavbarBrand className="home-link" href="/home">
+            <NavbarBrand className="home-link">
+            <Link to="/home">
                 <h1 className="title">Smart Card</h1>
                 <img className="icon" alt="Graphic of a notepad icon" src="https://img.icons8.com/metro/52/a24bcf/note.png"/>
+                </Link>
             </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
