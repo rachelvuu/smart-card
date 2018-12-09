@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Link, Switch} from 'react-router-dom';
+import { BrowserRouter, Route, Switch} from 'react-router-dom';
 import { Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, Collapse } from 'reactstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 import HomePage from './Home';
 import AboutPage from './About';
 import NewCardsPage from './NewCards';
@@ -71,7 +72,7 @@ export class App extends Component {
   }
 
 
-  // Takes in an array of cards
+  // Takes in an array of cards and saves them to database
   saveToDataBase(cards) {
     let db = firebase.database().ref(this.state.currentUser.uid);
     db.set({});
@@ -80,6 +81,7 @@ export class App extends Component {
     });
   }
 
+  // adds new card to database and state
   addCard(newCard) {
     let cards = this.state.cards;
     let key = this.state.cards.length;
@@ -91,6 +93,7 @@ export class App extends Component {
     });
   }
 
+  // Updates card in database and state
   updateCard(card) {
     let cards = this.state.cards;
     cards[card.key] = {
@@ -106,6 +109,7 @@ export class App extends Component {
     });
   }
 
+  // Removes all card in database and state
   clearCards() {
     if (this.state.currentUser != null) {
       this.saveToDataBase([]);
@@ -115,6 +119,7 @@ export class App extends Component {
     })
   }
 
+  // Deletes a single card in database and state
   deleteCard(index) {
     let cards = this.state.cards;
     for (let i = index; i < cards.length - 1; i++) {
@@ -173,7 +178,6 @@ export class Footer extends Component {
     )
   }
 }
-//"/new-cards" + (this.props.currentUser == null ? "" : currentUser.displayName)
 
 export class Header extends Component {
   constructor(props) {
@@ -213,33 +217,30 @@ export class Header extends Component {
     return (
       <div className="header">
         <Navbar color="light" light expand="md">
-            <NavbarBrand className="home-link">
-            <Link to="/home">
-                <h1 className="title">Smart Card</h1>
-                <img className="icon" alt="Graphic of a notepad icon" src="https://img.icons8.com/metro/52/a24bcf/note.png"/>
-                </Link>
-            </NavbarBrand>
+            <LinkContainer to="/home">
+              <NavbarBrand className="home-link">
+                  <h1 className="title">Smart Card</h1>
+                  <img className="icon" alt="Graphic of a notepad icon" src="https://img.icons8.com/metro/52/a24bcf/note.png"/>
+              </NavbarBrand>
+            </LinkContainer>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-              <NavItem className="nav-item">
-                <Link className="nav-link" to="/new-cards">
-                  <p>New Cards</p>
-                </Link>
+              <LinkContainer to="/new-cards" className="nav-item">
+                <NavItem className="nav-link"> <p>New Cards</p>
               </NavItem>
-              <NavItem className="nav-item">
-                <Link className="nav-link" to={"/my-cards/" + (this.state.currentUser == null ? "Guest" : this.state.currentUser.displayName)}>
-                  <p>My Cards</p>
-                </Link>
+              </LinkContainer>
+              <LinkContainer className="nav-item" to={"/my-cards/" + (this.state.currentUser == null ? "Guest" : this.state.currentUser.displayName)}>
+                <NavItem className="nav-link"> <p>My Cards</p>
+                </NavItem>
+              </LinkContainer>
+              <LinkContainer to="/about" className="nav-item">
+                <NavItem className="nav-link"> <p>About</p>
               </NavItem>
-              <NavItem className="nav-item">
-                <Link className="nav-link" to="/about">
-                  <p>About</p>
-                </Link>
-              </NavItem>
-              <NavItem>
-                <UserNav />
-              </NavItem>
+              </LinkContainer>
+              
+              <UserNav />
+
             </Nav>
           </Collapse>
         </Navbar>
@@ -248,6 +249,9 @@ export class Header extends Component {
   }
 }
 
+
+// Will display sign in or sign in depending on if the user
+// is signed in or not
 class UserNav extends Component {
   constructor() {
     super();
@@ -270,9 +274,17 @@ class UserNav extends Component {
 
   render() {
     if(this.state.user != null) {
-      return(<Link className="nav-link log-out" to="/signin" onClick={this.signOut}><p>Log Out</p></Link>);
+      return(<LinkContainer className="nav-item log-out" to="/signin" onClick={this.signOut}>
+        <NavItem className="nav-link">
+          <p>Log Out</p>
+        </NavItem>
+      </LinkContainer>);
     } else {
-      return(<Link className="nav-link sign-in" to="/signin"><p>Sign In</p></Link>);
+      return(<LinkContainer className="nav-item sign-in" to="/signin">
+        <NavItem className="nav-link">
+          <p>Sign In</p>
+        </NavItem>
+      </LinkContainer>);
     }
   }
 
@@ -285,6 +297,7 @@ class UserNav extends Component {
   }
 }
 
+// Modal to display errors
 export class ErrorModal extends Component {
   render() {
     return (

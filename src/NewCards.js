@@ -193,6 +193,7 @@ class SmartModeForm extends Component {
     )
   }
 
+  // Takes in event, uploads image and saves to state
   uploadFile(event) {
     if (event.target.files.length > 0) {
       let reader = new FileReader();
@@ -207,6 +208,7 @@ class SmartModeForm extends Component {
     }
   }
 
+  // Saves images to firebases to access later
   storeImageInFirebase() {
     if (this.props.checkLoggedIn() != null) {
       this.setState({loading:true}); 
@@ -221,11 +223,17 @@ class SmartModeForm extends Component {
     }
   }
 
+  // Gets text data of given image url from microsofts
+  // computer vision api
   getImageData(imgURL) {
+    //old 1e1835b4e4cd54a5ab4ccfae25cc8c37b
+    // old 21e00d2a6051b4162bf52c0fbb5424c40
+    // new 1 01f5115eac4d4a37884043fad6e56bea
+    // new key 2 : c3a55c25eac64ac5830b91106cfb936c
     let content = {
       headers: {
         "Content-Type": "application/json",
-        "Ocp-Apim-Subscription-Key": "1e00d2a6051b4162bf52c0fbb5424c40"
+        "Ocp-Apim-Subscription-Key": "01f5115eac4d4a37884043fad6e56bea"
       },
       method: "post",
       body: JSON.stringify({
@@ -243,7 +251,6 @@ class SmartModeForm extends Component {
       })
       .then((response) => {
         let text = "";
-        console.log(response);
         response = response.regions.forEach((region) => {
           region.lines.forEach((element) => {
             element.words.forEach((element2) => {
@@ -258,16 +265,19 @@ class SmartModeForm extends Component {
       });
   }
 
-
+  // Takes in String text and gets key phrases of text
+  // from microsoft's lanuage api
   getData(text) {
     if (this.props.checkLoggedIn() != null) {
       this.setState({loading:true});
       text = this.state.text.replace(/"/g, '\'') + " " + text;
-
+      // new 1: 374adf87a1db43bba16e264dd39fd35d
+      // new 2: e067f4d3614e4a4e9fc5c1c318d2a2d9
+      // old key 2796f530ee7443179bf560163b62a158
       let content = {
         headers: {
           "Content-Type": "application/json",
-          "Ocp-Apim-Subscription-Key": "2796f530ee7443179bf560163b62a158"
+          "Ocp-Apim-Subscription-Key": "374adf87a1db43bba16e264dd39fd35d"
         },
         method: "post",
         body: 
